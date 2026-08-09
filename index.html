@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Suyash Bhattarai | AI Engineer</title>
+    <meta
+      name="description"
+      content="Suyash Bhattarai is an AI engineer and full stack developer. World 2nd in Cambridge International A-Level Computer Science. He builds LLM systems, computer vision pipelines, and the infrastructure that keeps them honest."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <section class="hero wrap" data-hero>
+          <div class="hero__grid">
+            <div class="hero__copy">
+              <p class="label" data-hero-item>AI engineer and full stack developer</p>
+              <h1 class="hero__title" data-hero-item>
+                LLM systems<br />that <em>hold up</em><br />in production.
+              </h1>
+              <p class="lede" data-hero-item>
+                I build agents, guardrails, evals, and computer vision pipelines,
+                then sit with the people using them until the thing actually
+                works. Most of my time goes into the part after the demo.
+              </p>
+              <div class="actions" data-hero-item>
+                <a href="work.html" class="btn btn--solid">See the work <span class="arrow">&rarr;</span></a>
+                <a href="about.html" class="btn">About me</a>
+              </div>
+            </div>
+
+            <figure class="portrait" data-hero-item>
+              <img
+                src="images/portrait.jpg"
+                alt="Portrait of Suyash Bhattarai"
+                width="668"
+                height="1000"
+                loading="eager"
+                fetchpriority="high"
+                onerror="this.remove()"
+              />
+              <span class="portrait__fallback" aria-hidden="true">SB</span>
+            </figure>
+          </div>
+
+          <ul class="honors" data-hero-item aria-label="Honors">
+            <li>
+              <span class="honors__value">World 2nd in CS</span>
+              <span class="honors__label">Official Cambridge Recognition</span>
+            </li>
+            <li>
+              <span class="honors__value">Top in country in CS</span>
+              <span class="honors__label">Outstanding Cambridge Learner Awards</span>
+            </li>
+            <li>
+              <span class="honors__value">1540 SAT</span>
+              <span class="honors__label">99th percentile globally</span>
+            </li>
+            <li>
+              <span class="honors__value">A*s in CS and Maths</span>
+              <span class="honors__label">Cambridge International A Levels</span>
+            </li>
+            <li>
+              <span class="honors__value">Best Academic Performance Award</span>
+              <span class="honors__label">Budhanilkantha School</span>
+            </li>
+            <li>
+              <span class="honors__value">CAIE AS Level Topper</span>
+              <span class="honors__label">Budhanilkantha School</span>
+            </li>
+            <li>
+              <span class="honors__value">As in Economics, Business and EGP</span>
+              <span class="honors__label">Cambridge International A Levels</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">Selected work</p>
+              <h2 class="h2">Agents, infrastructure, and applied ML.</h2>
+            </div>
+
+            <div class="project-grid" data-reveal>
+              <article class="project-card project-card--has-demo">
+                <div class="project-card__top">
+                  <span class="project-card__num">01</span>
+                  <a class="project-card__demo btn" href="demo-openswitch.html">Live demo</a>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-openswitch.html" data-transition="expand">Open Switch</a></h3>
+                  <p class="project-card__desc">LLM gateway with circuit breakers, half-open probes, hedged requests, cost-aware routing, per-key budgets, and request traces.</p>
+                </div>
+                <ul class="tags"><li>Rust</li><li>Tokio</li><li>Axum</li><li>WASM</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo">
+                <div class="project-card__top">
+                  <span class="project-card__num">02</span>
+                  <a class="project-card__demo btn" href="demo-screener.html">Live demo</a>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-screener.html" data-transition="expand">Screener</a></h3>
+                  <p class="project-card__desc">Typo tolerant hybrid search with faceted filters that runs fully in the browser.</p>
+                </div>
+                <ul class="tags"><li>Rust</li><li>BM25</li><li>FST</li><li>WASM</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo">
+                <div class="project-card__top">
+                  <span class="project-card__num">03</span>
+                  <a class="project-card__demo btn" href="demo-evalgate.html">Live demo</a>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-evalgate.html" data-transition="expand">Evalgate</a></h3>
+                  <p class="project-card__desc">LLM evaluation runner with its own YAML check format, flakiness detection, and a pull request gate that writes a Markdown report.</p>
+                </div>
+                <ul class="tags"><li>Rust</li><li>CLI</li><li>YAML</li><li>WASM</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo">
+                <div class="project-card__top">
+                  <span class="project-card__num">04</span>
+                  <a class="project-card__demo btn" href="demo-fx.html">Live demo</a>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-fx.html" data-transition="expand">Corridor FX</a></h3>
+                  <p class="project-card__desc">FX exposure and hedging engine with a quantile forecast that is honest about what it cannot predict.</p>
+                </div>
+                <ul class="tags"><li>Python</li><li>XGBoost</li><li>FastAPI</li><li>React</li></ul>
+              </article>
+              <article class="project-card">
+                <div class="project-card__top">
+                  <span class="project-card__num">05</span>
+                  <span class="project-card__status">Case study</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-flamide.html" data-transition="expand">Flamide</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <p class="project-card__desc">Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.</p>
+                </div>
+                <ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Supabase</li><li>DeepSeek</li></ul>
+              </article>
+              <article class="project-card">
+                <div class="project-card__top">
+                  <span class="project-card__num">06</span>
+                  <span class="project-card__status">Case study</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-sekkin.html" data-transition="expand">Sekkin</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <p class="project-card__desc">Schema-first code generator where deterministic structure keeps the LLM focused on application logic.</p>
+                </div>
+                <ul class="tags"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>React Flow</li></ul>
+              </article>
+            </div>
+
+            <div class="more-link" data-reveal>
+              <a href="work.html" class="btn">All projects <span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">How I work</p>
+              <h2 class="h2">A green test suite is a claim, not a proof.</h2>
+            </div>
+            <div class="principles">
+              <div class="principle" data-reveal>
+                <p class="label">01</p>
+                <h3 class="h3">Run it live</h3>
+                <p>
+                  My worst bugs passed every mocked test. I run the real
+                  provider, unintercepted, before I call anything done.
+                </p>
+              </div>
+              <div class="principle" data-reveal>
+                <p class="label">02</p>
+                <h3 class="h3">Guardrails outside the model</h3>
+                <p>
+                  If a rule matters, code checks it after generation. Prompts ask
+                  nicely. Validators refuse.
+                </p>
+              </div>
+              <div class="principle" data-reveal>
+                <p class="label">03</p>
+                <h3 class="h3">Say what wasn't measured</h3>
+                <p>
+                  Every report I write lists what it can't claim. A 0.55 AUC gets
+                  reported as a coin flip, not rounded up.
+                </p>
+              </div>
+              <div class="principle" data-reveal>
+                <p class="label">04</p>
+                <h3 class="h3">Sit with the users</h3>
+                <p>
+                  I've shipped to factory floors, school offices, and police
+                  briefings. The spec is whatever they actually need on day two.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap" data-reveal>
+            <p class="label">Contact</p>
+            <h2 class="h2" style="margin-block: var(--space-4) var(--space-7)">
+              Let's build something<br />that holds up.
+            </h2>
+            <div class="actions">
+              <a href="mailto:hey@suyashbhattarai.com.np" class="btn btn--solid">hey@suyashbhattarai.com.np <span class="arrow">&rarr;</span></a>
+              <a href="https://github.com/ItsM0rty" class="btn" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
