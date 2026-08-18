@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Work | Suyash Bhattarai</title>
+    <meta
+      name="description"
+      content="Selected work by Suyash Bhattarai: production LLM systems, Rust infrastructure, case studies, and earlier full-stack builds."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Work</p>
+          <h1 class="case-hero__title" data-hero-item>Selected work</h1>
+          <p class="lede" data-hero-item>
+            Production LLM systems, Rust infrastructure, applied ML, and the full
+            stack products around them.
+          </p>
+        </header>
+
+        <section class="section work-section">
+          <div class="wrap">
+            <div class="filters" role="group" aria-label="Filter projects" data-reveal>
+              <button class="filter" type="button" data-filter="all" aria-pressed="true">
+                All <span class="filter__count">11</span>
+              </button>
+              <button class="filter" type="button" data-filter="ai" aria-pressed="false">
+                AI and ML engineering <span class="filter__count">9</span>
+              </button>
+              <button class="filter" type="button" data-filter="fde" aria-pressed="false">
+                Forward deployed <span class="filter__count">5</span>
+              </button>
+              <button class="filter" type="button" data-filter="fullstack" aria-pressed="false">
+                Full stack <span class="filter__count">4</span>
+              </button>
+            </div>
+
+            <div class="project-grid" data-reveal>
+              <article class="project-card project-card--has-demo" data-category="ai fde">
+                <div class="project-card__top"><span class="project-card__num">01</span><a class="project-card__demo btn" href="demo-openswitch.html">Live demo</a></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-openswitch.html" data-transition="expand">Open Switch</a></h3><p class="project-card__desc">LLM gateway with circuit breakers, half-open probes, hedged requests, cost-aware routing, per-key budgets, and request traces.</p></div>
+                <ul class="tags"><li>Rust</li><li>Tokio</li><li>Axum</li><li>WASM</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo" data-category="ai">
+                <div class="project-card__top"><span class="project-card__num">02</span><a class="project-card__demo btn" href="demo-screener.html">Live demo</a></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-screener.html" data-transition="expand">Screener</a></h3><p class="project-card__desc">Typo tolerant hybrid search with faceted filters that runs fully in the browser.</p></div>
+                <ul class="tags"><li>Rust</li><li>BM25</li><li>FST</li><li>WebAssembly</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo" data-category="ai fde">
+                <div class="project-card__top"><span class="project-card__num">03</span><a class="project-card__demo btn" href="demo-evalgate.html">Live demo</a></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-evalgate.html" data-transition="expand">Evalgate</a></h3><p class="project-card__desc">LLM evaluation runner with its own YAML check format, flakiness detection, and a pull request gate that writes a Markdown report.</p></div>
+                <ul class="tags"><li>Rust</li><li>CLI</li><li>YAML</li><li>WASM</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo" data-category="ai fde">
+                <div class="project-card__top"><span class="project-card__num">04</span><a class="project-card__demo btn" href="demo-fx.html">Live demo</a></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-fx.html" data-transition="expand">Corridor FX</a></h3><p class="project-card__desc">FX exposure and hedging engine with a quantile forecast that is honest about what it cannot predict.</p></div>
+                <ul class="tags"><li>Python</li><li>XGBoost</li><li>FastAPI</li><li>React</li></ul>
+              </article>
+              <article class="project-card" data-category="ai fde fullstack">
+                <div class="project-card__top"><span class="project-card__num">05</span><span class="project-card__status">Case study</span></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-flamide.html" data-transition="expand">Flamide</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.</p></div>
+                <ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Supabase</li><li>DeepSeek</li></ul>
+              </article>
+              <article class="project-card" data-category="ai fullstack">
+                <div class="project-card__top"><span class="project-card__num">06</span><span class="project-card__status">Case study</span></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-sekkin.html" data-transition="expand">Sekkin</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Schema-first code generator where deterministic structure keeps the LLM focused on application logic.</p></div>
+                <ul class="tags"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>React Flow</li></ul>
+              </article>
+              <article class="project-card project-card--has-demo" data-category="ai fullstack">
+                <div class="project-card__top"><span class="project-card__num">07</span><a class="project-card__demo btn" href="demo-quint.html">Live demo</a></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-quint.html" data-transition="expand">Quint</a></h3><p class="project-card__desc">React library for turning chat buttons into explicit decisions.</p></div>
+                <ul class="tags"><li>React</li><li>TypeScript</li><li>npm</li></ul>
+              </article>
+              <article class="project-card" data-category="ai">
+                <div class="project-card__top">
+                  <span class="project-card__num">08</span>
+                  <span class="project-card__status">Research</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-alignment.html" data-transition="expand">Representation alignment</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <p class="project-card__desc">
+                    Tested the Platonic Representation Hypothesis at toy scale. Reproduced a
+                    reference alignment method to 96.37% against a published 96.01%, then
+                    recovered held-out structure between independent encoders after a centering
+                    ablation.
+                  </p>
+                </div>
+                <ul class="tags">
+                  <li>PyTorch</li>
+                  <li>Procrustes</li>
+                  <li>Research</li>
+                </ul>
+              </article>
+
+              <article class="project-card" data-category="ai">
+                <div class="project-card__top">
+                  <span class="project-card__num">09</span>
+                  <span class="project-card__status">Research</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-savings-score.html" data-transition="expand">Savings score stress test</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <p class="project-card__desc">Synthetic stress test of a venue savings score, with an audit of confounding, observability, and tuning claims.</p>
+                </div>
+                <ul class="tags">
+                  <li>Python</li>
+                  <li>Simulation</li>
+                  <li>Audit</li>
+                </ul>
+              </article>
+
+              <article class="project-card project-card--static" data-category="fullstack">
+                <div class="project-card__top">
+                  <span class="project-card__num">10</span>
+                  <span class="project-card__status">Earlier</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title">Storefront</h3>
+                  <p class="project-card__desc">
+                    React and Django store with Stripe PaymentIntents, order tracking, and email
+                    notifications driven by Django signals.
+                  </p>
+                </div>
+                <ul class="tags">
+                  <li>React</li>
+                  <li>Django</li>
+                  <li>Stripe</li>
+                  <li>REST</li>
+                </ul>
+              </article>
+
+              <article class="project-card project-card--static" data-category="fullstack">
+                <div class="project-card__top">
+                  <span class="project-card__num">11</span>
+                  <span class="project-card__status">Earlier</span>
+                </div>
+                <div class="project-card__body">
+                  <h3 class="project-card__title">Quild</h3>
+                  <p class="project-card__desc">
+                    Interactive 3D building configurator in the browser.
+                  </p>
+                </div>
+                <ul class="tags">
+                  <li>React</li>
+                  <li>Three.js</li>
+                  <li>React Three Fiber</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer is-dark">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
