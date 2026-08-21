@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Flamide | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: a multilingual AI agent for education consultancies, with guardrails enforced in code and tenant isolation in the database." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Case study 01, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Flamide</h1>
+          <p class="lede" data-hero-item>
+            An AI agent that answers student enquiries for education consultancies
+            over Instagram, Messenger, and WhatsApp, in Nepali, English, and the
+            romanized mix people actually type. It qualifies the lead, fills the
+            CRM, follows up when the student goes quiet, and hands off to a
+            counselor at the moments a machine shouldn't decide.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div>
+              <dt class="label">Role</dt>
+              <dd>Lead engineer. I designed and built the core architecture.</dd>
+            </div>
+            <div>
+              <dt class="label">Stack</dt>
+              <dd>Next.js 16, TypeScript, Supabase (Postgres, RLS, Realtime), DeepSeek, Vitest, Playwright</dd>
+            </div>
+            <div>
+              <dt class="label">Scale of the codebase</dt>
+              <dd>562 commits, 1,592 unit tests, 315 end-to-end tests</dd>
+            </div>
+            <div>
+              <dt class="label">Code</dt>
+              <dd>Private. Happy to walk through it on a call.</dd>
+            </div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">01</p>
+              <h2 class="h3">The problem</h2>
+            </div>
+            <div class="prose">
+              <p>
+                Consultancies in Nepal run on DMs. Most enquiries come in after
+                hours, in mixed script, and ask the same handful of questions about
+                courses, fees, and intakes. A generic chatbot handles those fine.
+              </p>
+              <p>
+                The expensive messages are the other ones. "Will my visa get
+                approved?" "I was refused last year." "Can you lower the fee?" A
+                bot that answers those confidently is worse than no bot, because a
+                wrong answer about a visa file has real consequences for a
+                student and real liability for the consultancy.
+              </p>
+              <p>
+                So the job was never "answer everything." It was: answer what is
+                grounded in the consultancy's own data, and escalate the rest
+                with a reason a counselor can act on.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">02</p>
+              <h2 class="h3">How it's built</h2>
+            </div>
+            <div class="prose">
+              <p>Every AI turn goes through the same fixed order:</p>
+              <ol class="pipeline">
+                <li><span><strong>Inbound guardrails.</strong> Prior refusals, complaints, finance questions, and requests for a human escalate before the model is called.</span></li>
+                <li><span><strong>Generate.</strong> A six-layer prompt: style, guardrails, domain reference, consultancy identity, catalog, then conversation state.</span></li>
+                <li><span><strong>Outbound guardrails.</strong> Code checks the reply for visa predictions, invented requirements, and misattributed ones.</span></li>
+                <li><span><strong>Regenerate once.</strong> One retry with the violation named. No loops.</span></li>
+                <li><span><strong>Escalate.</strong> If it still fails, the conversation goes to a human with the reason attached.</span></li>
+              </ol>
+
+              <h3>Decisions that mattered</h3>
+              <ul>
+                <li>
+                  <strong>Tenant isolation lives in the database.</strong> Every
+                  table carries <code>workspace_id</code> with a row level
+                  security policy, and composite <code>(workspace_id, id)</code>
+                  foreign keys make a cross-tenant reference impossible to
+                  write. The isolation suite is the most important test suite in
+                  the repo.
+                </li>
+                <li>
+                  <strong>The model is not a privileged writer.</strong> Its
+                  writes go through narrow SQL functions. Internal columns are
+                  kept out of prompts by an allowlist, and a schema test fails
+                  the build if someone adds a column without classifying it.
+                </li>
+                <li>
+                  <strong>The prompt is shaped for the cache.</strong> The first
+                  five layers are byte-stable per workspace and sit before a
+                  cache boundary, so the provider's prompt-cache discount
+                  applies to most of every request.
+                </li>
+                <li>
+                  <strong>Scheduled delivery is a table, not a timer.</strong>
+                  Replies are claimed with a lease and sent exactly once, so
+                  typing delays, follow-up nudges, and multi-part messages
+                  survive a worker restart.
+                </li>
+                <li>
+                  <strong>Channels sit behind an adapter.</strong> Nothing above
+                  <code>ChannelAdapter</code> knows a Meta payload exists, so
+                  every flow is testable with a mock channel before platform
+                  approval.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side">
+                <p class="label">03</p>
+                <h2 class="h3">What broke, and what I changed</h2>
+                <p class="muted">The parts a demo never shows.</p>
+              </div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Incident</span>
+                  <h3>Green suite, silent product</h3>
+                  <p>
+                    The first live call to the model returned nothing. Every
+                    reply, every time. In the "careful" effort mode the model
+                    spent the whole token budget reasoning and got cut off
+                    before writing a character, and the engine quietly logged
+                    that as "silent." 1,487 tests passed, because the mock
+                    provider had no token ceiling.
+                  </p>
+                  <p>
+                    I sized the ceilings per effort level from measured
+                    completions (they had reached 96.8% of the old limit), added
+                    a guard that fails loudly on an empty completion, and
+                    started treating live runs as a separate gate.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Incident</span>
+                  <h3>Every fact true, the sentence false</h3>
+                  <p>
+                    A reply told a student that CQUniversity needs 75% for CBSE
+                    students. CQUniversity had no CBSE requirement on file, and
+                    75% belonged to Coventry, in another country. Each piece was
+                    real, so an existence check could never catch it.
+                  </p>
+                  <p>
+                    The guardrail now validates the whole tuple (university,
+                    board, value) against the database, and a missing row counts
+                    as a violation. That turns "requirement unknown" into an
+                    escalation instead of a guess.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Incident</span>
+                  <h3>The provider answered with 86 spaces</h3>
+                  <p>
+                    Certain JSON-mode requests came back as pure whitespace with
+                    a normal stop reason, deterministically, at temperature 0. I
+                    isolated the trigger to the JSON-mode flag with five
+                    variations of the captured payload.
+                  </p>
+                  <p>
+                    The engine now retries that one turn without the flag and
+                    parses the result through the same reader. It's documented as
+                    a mitigation rather than a fix, because the provider behavior
+                    is still unexplained.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">04, Numbers</p>
+              <h2 class="h2">Measured, then decided.</h2>
+            </div>
+            <div class="stats" data-reveal>
+              <div>
+                <p class="stat__value">1,592</p>
+                <p class="stat__label">unit tests across 89 files, plus 315 end-to-end and 4 realtime</p>
+              </div>
+              <div>
+                <p class="stat__value">~12x</p>
+                <p class="stat__label">more output tokens in careful mode than fast, for no grounding gain</p>
+              </div>
+              <div>
+                <p class="stat__value">~13s</p>
+                <p class="stat__label">per careful reply, too slow for DMs, so fast became the default</p>
+              </div>
+              <div>
+                <p class="stat__value">5 min</p>
+                <p class="stat__label">follow-up floor, enforced at the constraint, validator, and UI</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">05</p>
+              <h2 class="h3">Limits, stated plainly</h2>
+            </div>
+            <div class="prose">
+              <ul>
+                <li>Instagram and WhatsApp adapters are stubs until Meta's app review clears. Everything runs on the mock channel today.</li>
+                <li>There is no live-model canary set yet. It's the next thing I'd build, since two of the worst bugs only showed up live.</li>
+                <li>The formal six-conversation evaluation against the current version hasn't run. The founder live session has.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-sekkin.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Sekkin <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
