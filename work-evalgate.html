@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Evalgate | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: Evalgate, a Rust evaluation runner with live and replay targets, weighted checks, regression reports, and browser execution." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Case study, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Evalgate</h1>
+          <p class="lede" data-hero-item>
+            A Rust evaluation runner and CI gate for live or recorded model outputs. Define
+            weighted checks in YAML, classify repeated runs, and report score regressions.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div>
+              <dt class="label">Role</dt>
+              <dd>Solo project. Design, implementation, and site integration.</dd>
+            </div>
+            <div>
+              <dt class="label">Stack</dt>
+              <dd>Rust, Tokio, reqwest, serde_yaml, wasm-bindgen, GitHub Actions</dd>
+            </div>
+            <div>
+              <dt class="label">Links</dt>
+              <dd><a href="demo-evalgate.html">Live demo</a>, <a href="https://github.com/ItsM0rty/evalgate">GitHub</a></dd>
+            </div>
+            <div>
+              <dt class="label">Code</dt>
+              <dd>Open source, on GitHub.</dd>
+            </div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">01</p>
+              <h2 class="h3">The problem</h2>
+            </div>
+            <div class="prose">
+              <p>
+                Prompt changes ship without tests. A wording tweak in the system message,
+                a new few-shot example, or a model swap can pass code review and break
+                production behavior. Regressions show up as customer complaints, not CI failures.
+              </p>
+              <p>
+                Evaluation should support live endpoints during development without making CI
+                depend on API keys. Evalgate uses the same YAML schema for OpenAI-compatible,
+                Anthropic, echo, and recorded replay targets. The replay path keeps pull request
+                runs deterministic.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">02</p>
+              <h2 class="h3">How it is built</h2>
+            </div>
+            <div class="prose">
+              <p>The workspace separates pure evaluation logic, asynchronous IO, and browser bindings:</p>
+              <ol class="pipeline">
+                <li><span><strong>evalgate-core.</strong> Validates suites, renders templates, evaluates checks, scores weighted results, classifies repeats, and builds reports without doing IO.</span></li>
+                <li><span><strong>evalgate-cli.</strong> Executes live or replay targets with bounded concurrency, rate limiting, retries, request timeouts, disk caching, and snapshot storage.</span></li>
+                <li><span><strong>evalgate-wasm.</strong> Exposes deterministic evaluation, report comparison, and a flaky classification example to the browser demo.</span></li>
+              </ol>
+
+              <h3>Decisions that mattered</h3>
+              <ul>
+                <li>
+                  <strong>Repeat classification.</strong> <code>--repeat</code> records a case pass
+                  rate and distinguishes stable passes, stable failures, and partial flaky results.
+                </li>
+                <li>
+                  <strong>Checks at different layers.</strong> Text, regex, JSON shape, similarity,
+                  latency, cost, snapshot, LLM judge, and embedding checks feed one weighted score.
+                </li>
+                <li>
+                  <strong>CI output.</strong> Runs render terminal tables, JSON, or JUnit XML.
+                  Comparisons render tables, JSON, or Markdown and exit with status 1 on regression.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side">
+                <p class="label">03</p>
+                <h2 class="h3">What was hard</h2>
+                <p class="muted">Parts that took more than one pass.</p>
+              </div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Detail</span>
+                  <h3>Keeping network behavior testable</h3>
+                  <p>
+                    Target requests share a concurrency semaphore and token interval, while retry
+                    policy handles HTTP 429 and server errors. Local HTTP tests verify request
+                    spacing, retry order, provider response parsing, and cache hits.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Detail</span>
+                  <h3>Flaky cases need their own status</h3>
+                  <p>
+                    A case that passes some samples is different from a stable regression.
+                    The report keeps pass rate and flaky state alongside weighted check results,
+                    so comparison output does not collapse intermittent behavior into one verdict.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Detail</span>
+                  <h3>Snapshots are explicit</h3>
+                  <p>
+                    Snapshot checks accept a first output only with <code>--update-snapshots</code>,
+                    then compare later output against that saved value.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">04, Numbers</p>
+              <h2 class="h2">Measured, then stated.</h2>
+            </div>
+            <div class="stats" data-reveal>
+              <div>
+                <p class="stat__value">1.387 ms</p>
+                <p class="stat__label">to evaluate 10,000 deterministic checks natively (release build)</p>
+              </div>
+              <div>
+                <p class="stat__value">53</p>
+                <p class="stat__label">passing tests, including 8 local HTTP integration tests</p>
+              </div>
+              <div>
+                <p class="stat__value">1,073,420 bytes</p>
+                <p class="stat__label">optimized WASM binary with the size-focused release profile</p>
+              </div>
+              <div>
+                <p class="stat__value">15</p>
+                <p class="stat__label">named check kinds in the suite schema</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-alignment.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Representation alignment <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
