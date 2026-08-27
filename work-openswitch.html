@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Open Switch | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: a Rust routing simulator for failure-aware, latency-aware deployment selection." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary"><div class="wrap nav__inner"><a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a><ul class="nav__links"><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Case study, 2026</p><h1 class="case-hero__title" data-hero-item>Open Switch</h1>
+          <p class="lede" data-hero-item>A Rust LLM gateway with deterministic routing simulation, provider fallbacks, per-key budgets, and streamed OpenAI-compatible responses.</p>
+          <dl class="meta" data-hero-item><div><dt class="label">Role</dt><dd>Design and engineering</dd></div><div><dt class="label">Stack</dt><dd>Rust, axum, WebAssembly, vanilla JS</dd></div><div><dt class="label">Repository</dt><dd><a href="https://github.com/ItsM0rty/openswitch">GitHub <span class="arrow">&rarr;</span></a></dd></div></dl>
+          <div class="actions" data-hero-item><a class="btn btn--solid" href="demo-openswitch.html">Run the simulation <span class="arrow">&rarr;</span></a></div>
+        </header>
+        <section class="section"><div class="wrap"><div class="chapter" data-reveal><div class="chapter__side"><p class="label">01</p><h2 class="h3">The routing decision is a moving target.</h2></div><div class="prose"><p>A deployment can look cheap and healthy until a run of failures or a latency spike changes the tradeoff. The routing core is deterministic and separate from HTTP, so the browser demo can exercise the same decision model without contacting a provider.</p><p>The axum gateway accepts OpenAI-compatible chat requests, lists configured models, emits SSE for streaming responses, and exposes plain-text request and latency metrics.</p></div></div></div></section>
+        <section class="section"><div class="wrap"><div class="chapter" data-reveal><div class="chapter__side"><p class="label">02</p><h2 class="h3">Failure has a state machine.</h2></div><div class="prose"><p>A deployment breaker starts closed, opens after consecutive failures, and later admits a limited half-open probe set. Successful probes return it to closed. The simulation exposes that state for every deployment after a run.</p><p>Latency is an exponentially weighted moving average. Unlike a fixed window, the alpha makes the reaction speed explicit. Cost-aware routing selects the cheapest healthy choice within a configured latency budget.</p></div></div></div></section>
+        <section class="section"><div class="wrap"><div class="chapter" data-reveal><div class="chapter__side"><p class="label">03</p><h2 class="h3">Protect the slow tail with a second attempt.</h2></div><div class="prose"><p>When the first request crosses the hedge delay, the gateway starts the next deployment and uses the first completed answer. Tokio cancels the losing attempt when the request future is dropped. The simulation reports hedge count and modeled tail latency saved.</p><p>Bearer keys have token ceilings per minute. Model groups and prices stay in deployment configuration, and mock, OpenAI-compatible, and Anthropic adapters share the request shape at the gateway boundary.</p></div></div></div></section>
+        <section class="section"><div class="wrap"><div class="section-head" data-reveal><p class="label">04, Measured</p><h2 class="h2">Small enough to inspect.</h2></div><div class="stats" data-reveal><div><p class="stat__value">37</p><p class="stat__label">tests passing in the workspace</p></div><div><p class="stat__value">212 ns</p><p class="stat__label">per routing decision over 100,000 release iterations</p></div><div><p class="stat__value">578,428</p><p class="stat__label">in-process gateway requests per second at concurrency 64</p></div><div><p class="stat__value">0.11 / 0.23 ms</p><p class="stat__label">added gateway latency, p50 / p99, over 20 seconds</p></div><div><p class="stat__value">93,954 B</p><p class="stat__label">optimized browser WebAssembly binary</p></div></div></div></section>
+        <a href="work-screener.html" class="next-case wrap"><span class="label">Next case study</span><span class="next-case__title">Screener <span class="arrow">&rarr;</span></span></a>
+      </main>
+      <footer class="footer"><div class="wrap footer__inner"><span>&copy; 2026 Suyash Bhattarai</span><a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a></div></footer>
+    </div>
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
