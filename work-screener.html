@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Screener | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: a Rust hybrid search engine with typo-tolerant BM25, static embeddings, and reciprocal rank fusion, compiled to WASM." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Case study, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Screener</h1>
+          <p class="lede" data-hero-item>
+            A hybrid search engine in Rust: BM25 with typo tolerance and ranking rules on
+            the keyword side, a static embedding model on the semantic side, fused with
+            reciprocal rank fusion. One core library, a CLI, and a WASM build that runs the
+            demo in the browser without a server round trip.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div>
+              <dt class="label">Role</dt>
+              <dd>Sole author. Design, implementation, eval, and demo.</dd>
+            </div>
+            <div>
+              <dt class="label">Stack</dt>
+              <dd>Rust, wasm-bindgen, postcard, arXiv metadata (CC0)</dd>
+            </div>
+            <div>
+              <dt class="label">Scope</dt>
+              <dd>3,000 papers, 300 known-item queries, 12 tests</dd>
+            </div>
+            <div>
+              <dt class="label">Links</dt>
+              <dd><a href="demo-screener.html">Live demo</a>, <a href="https://github.com/ItsM0rty/screener">GitHub</a></dd>
+            </div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">01</p>
+              <h2 class="h3">The problem</h2>
+            </div>
+            <div class="prose">
+              <p>
+                Keyword search misses paraphrases. "Policy gradient training" will not match
+                a paper that only says "reinforcement learning" in the abstract. Vector
+                search fixes that, but it misses exact terms and typos. A query for
+                "informtion retrieval" should still find information retrieval papers.
+              </p>
+              <p>
+                Most products need both signals. The hard part is not calling two APIs. It
+                is ranking: when to trust BM25, when to trust cosine similarity, and how
+                to break ties without hiding why a result appeared.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">02</p>
+              <h2 class="h3">Design</h2>
+            </div>
+            <div class="prose">
+              <p>The pipeline splits cleanly into build time and query time.</p>
+              <ol class="pipeline">
+                <li><span><strong>Index build.</strong> Tokenize titles and bodies into an inverted BM25 index. Embed each document with a static model (HuggingFace tokenizer, int8 lookup table, mean pool, L2 normalize). Serialize document embeddings to a postcard blob; ship the model as sidecar files.</span></li>
+                <li><span><strong>Lexical retrieval.</strong> Parse the query into terms. Match the dictionary with an FST plus Levenshtein automaton (bounded distance by term length; first-letter mismatches cost double). Prefix search on the last term. Score with BM25, then bucket-sort by words, typo, proximity, attribute rank, word position, exactness.</span></li>
+                <li><span><strong>Vector retrieval.</strong> Brute-force cosine similarity over document embeddings. Fine at 3,000 docs; HNSW deferred.</span></li>
+                <li><span><strong>Fusion.</strong> Reciprocal rank fusion with k=60 and a tunable semantic ratio. Each hit carries bm25 rank, vector rank, fused score, and per-term typo counts.</span></li>
+              </ol>
+              <p>
+                <code>screener-core</code> has no IO. The CLI builds indexes and runs evals.
+                <code>screener-wasm</code> exposes one constructor and a <code>query</code> method
+                that returns JSON.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side">
+                <p class="label">03</p>
+                <h2 class="h3">What was hard</h2>
+                <p class="muted">Details the README skips.</p>
+              </div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Build</span>
+                  <h3>WordPiece on full abstracts</h3>
+                  <p>
+                    The first index build hung after "Indexed 3000 documents." Greedy
+                    WordPiece over multi-kilobyte abstracts is quadratic in text length.
+                    Truncating embed input to 512 characters fixed build time without
+                    hurting recall much on titles plus lead sentences.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Embedder</span>
+                  <h3>Tokenizer parity with the reference</h3>
+                  <p>
+                    Semantic recall near zero turned out to be a bug, not a weak model.
+                    A hand-rolled WordPiece tokenizer did not match the reference encoder.
+                    Switching to the HuggingFace tokenizer crate and excluding special tokens
+                    from the mean brought cosine parity above 0.99 on a checked-in fixture.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">WASM</span>
+                  <h3>FST build on load</h3>
+                  <p>
+                    Building the term FST eagerly during engine construction trapped WASM
+                    with an unreachable panic on the full corpus. Lazy initialization on first
+                    query fixed it without changing search behavior.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">04, Numbers</p>
+              <h2 class="h2">Measured on the eval set.</h2>
+            </div>
+            <div class="prose" data-reveal style="max-width: 52rem; margin-bottom: 2rem">
+              <p class="muted" style="margin-bottom: 1.25rem">
+                Known-item search over 300 queries (100 sampled docs, three query types each:
+                keyword, typo, paraphrase). Hybrid semantic ratio tuned to 0.3 on the train
+                split; numbers below are on the held-out test split (150 queries).
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Query type</th>
+                    <th>Mode</th>
+                    <th>Recall@1</th>
+                    <th>Recall@10</th>
+                    <th>MRR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Keyword</td><td>Keyword</td><td>0.688</td><td>0.896</td><td>0.753</td></tr>
+                  <tr><td>Keyword</td><td>Semantic</td><td>0.583</td><td>0.854</td><td>0.706</td></tr>
+                  <tr><td>Keyword</td><td>Hybrid, rank fusion</td><td>0.792</td><td>0.938</td><td>0.852</td></tr>
+                  <tr><td>Keyword</td><td>Hybrid, score blend</td><td>0.750</td><td>0.958</td><td>0.822</td></tr>
+                  <tr><td>Typo</td><td>Keyword</td><td>0.646</td><td>0.958</td><td>0.749</td></tr>
+                  <tr><td>Typo</td><td>Semantic</td><td>0.396</td><td>0.812</td><td>0.542</td></tr>
+                  <tr><td>Typo</td><td>Hybrid, rank fusion</td><td>0.750</td><td>0.958</td><td>0.829</td></tr>
+                  <tr><td>Typo</td><td>Hybrid, score blend</td><td>0.771</td><td>0.938</td><td>0.842</td></tr>
+                  <tr><td>Paraphrase</td><td>Keyword</td><td>0.625</td><td>0.896</td><td>0.734</td></tr>
+                  <tr><td>Paraphrase</td><td>Semantic</td><td>0.729</td><td>0.917</td><td>0.793</td></tr>
+                  <tr><td>Paraphrase</td><td>Hybrid, rank fusion</td><td>0.750</td><td>0.917</td><td>0.816</td></tr>
+                  <tr><td>Paraphrase</td><td>Hybrid, score blend</td><td>0.792</td><td>0.917</td><td>0.844</td></tr>
+                </tbody>
+              </table>
+              <p class="muted" style="margin-top: 1rem">
+                The train split selected a 0.3 semantic mix with train MRR 0.873. The reference
+                embedding parity test passed with cosine above 0.99 for every fixture.
+              </p>
+            </div>
+            <div class="stats" data-reveal>
+              <div>
+                <p class="stat__value">10.35 MB</p>
+                <p class="stat__label">gzip transfer payload for the search assets</p>
+              </div>
+              <div>
+                <p class="stat__value">12</p>
+                <p class="stat__label">tests: typo rules, ranking, BM25, RRF, embed parity, round trip</p>
+              </div>
+              <div>
+                <p class="stat__value">9.81 MB</p>
+                <p class="stat__label">rebuilt postcard index</p>
+              </div>
+              <div>
+                <p class="stat__value">3,000</p>
+                <p class="stat__label">arXiv papers (cs.CL, cs.LG, cs.IR metadata)</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">05</p>
+              <h2 class="h3">Try it</h2>
+            </div>
+            <div class="prose">
+              <p><a href="demo-screener.html">Try the live demo</a> or browse the source on <a href="https://github.com/ItsM0rty/screener">GitHub</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-evalgate.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Evalgate <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
