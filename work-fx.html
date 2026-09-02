@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Corridor FX | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: an operational intelligence dashboard for a US to Nepal remittance operator, quantifying Convert Later FX exposure and forecasting risk bands on a managed peg." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Case study 03, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Corridor FX</h1>
+          <p class="lede" data-hero-item>
+            An operational intelligence command center for a US to Nepal remittance
+            operator. It quantifies the FX exposure from a "Send Now, Convert Later"
+            feature, sizes recoverable margin across the book, and forecasts a 15-day
+            move band on USD/NPR. NPR is pegged to INR at 1.6, so the corridor risk
+            factor is really USD/INR expressed through the peg.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div>
+              <dt class="label">Role</dt>
+              <dd>Solo. Engine, dashboard, and models.</dd>
+            </div>
+            <div>
+              <dt class="label">Stack</dt>
+              <dd>Python, FastAPI, XGBoost, Vite, React, TypeScript, recharts</dd>
+            </div>
+            <div>
+              <dt class="label">Corridor</dt>
+              <dd>USD/NPR proxy from public INR per USD daily observations</dd>
+            </div>
+            <div>
+              <dt class="label">Demo</dt>
+              <dd><a href="demo-fx.html">Run the forecast and hedge demo</a></dd>
+            </div>
+            <div>
+              <dt class="label">Code</dt>
+              <dd>Private. Walkthrough on request.</dd>
+            </div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">01</p>
+              <h2 class="h3">The problem</h2>
+            </div>
+            <div class="prose">
+              <p>
+                A remittance operator that lets customers send now and convert later
+                carries open FX exposure until each position settles. The treasury
+                desk needs to know how large that book is, what a 95% VaR looks like
+                at the position's horizon, and whether a hedge clears an editable
+                risk tolerance after hedge cost.
+              </p>
+              <p>
+                Separately, margin leaks in three places: unhedged Convert Later risk
+                net of hedge cost, idle Nostro balances sitting below the NRB deposit
+                rate, and customer markup that could move by a basis point. The
+                operator needs those buckets sized in one place, not spread across
+                spreadsheets.
+              </p>
+              <p>
+                USD/NPR on a managed peg is not a directional bet. Risk is basis
+                points per cycle. The product value is VaR, hedging, and idle-capital
+                opportunity cost, not pretending to call the next move.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">02</p>
+              <h2 class="h3">How it's built</h2>
+            </div>
+            <div class="prose">
+              <p>
+                FastAPI serves a Python engine split into four modules:
+                <code>data.py</code>, <code>exposure.py</code>, <code>margin.py</code>,
+                and <code>forecast.py</code>. A Vite + React + TypeScript dashboard
+                reads the API and charts the series with recharts.
+              </p>
+              <ol class="pipeline">
+                <li><span><strong>Positions in.</strong> The engine ingests a Convert Later book and computes aggregate exposure, horizon-scaled 95% VaR, a maturity ladder, per-position risk, and a hedge recommendation (notional, cost, residual VaR) against an editable tolerance.</span></li>
+                <li><span><strong>Margin out.</strong> Three buckets: unhedged Convert Later risk net of hedge cost, idle Nostro opportunity cost at the NRB deposit rate, and customer-markup yield with per-basis-point sensitivity.</span></li>
+                <li><span><strong>Forecast band.</strong> An XGBoost quantile model outputs p05, p50, and p95 for the 15-day move percentage, with an out-of-sample coverage check against a 0.90 target.</span></li>
+                <li><span><strong>API surface.</strong> <code>/api/overview</code>, <code>/api/series</code>, <code>/api/positions</code>, <code>/api/exposure</code>, and <code>/api/margin</code> expose the same logic the UI uses.</span></li>
+              </ol>
+              <p>
+                Risk statistics are empirical from NRB USD/NPR daily rates. The sample
+                position book is synthetic, seeded to simulate a Dashain-season surge
+                so hedge logic is demonstrable without a live feed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side">
+                <p class="label">03</p>
+                <h2 class="h3">What I chose not to oversell</h2>
+                <p class="muted">Honesty as a design constraint.</p>
+              </div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Direction model</span>
+                  <h3>Held-out quantile loss beats a random-walk baseline</h3>
+                  <p>
+                    I built a classifier for whether waiting beats converting today
+                    over a 15-day horizon. It was roughly a coin flip on a managed
+                    peg, so the demo does not use it as a hedge signal.
+                  </p>
+                  <p>
+                    The quantile model is the one hedging actually needs. It forecasts
+                    the range, not the sign. On its held-out window, the 14-day
+                    p10-p90 interval covers 0.72 of outcomes. Its mean pinball loss
+                    is 0.32172 versus 0.54243 for a random-walk baseline.
+                  </p>
+                </div>
+                <div class="incident">
+                  <span class="label">Data engineering</span>
+                  <h3>Monthly remittance from press reports, not blocked PDFs</h3>
+                  <p>
+                    NRB publishes cumulative fiscal-year-to-date remittance totals in
+                    monthly macro reports. Nepali financial press repeats those totals
+                    and often states the single most recent month. NRB blocks
+                    server-side PDF downloads with 403, so I reconstructed monthly
+                    inflows by differencing consecutive cumulative figures from press
+                    coverage and cross-checking that monthly sums match the next
+                    cumulative total.
+                  </p>
+                  <p>
+                    A separate Prophet forecaster on 58 monthly points treats 9 rows
+                    flagged as interpolated guesses as a sensitivity check: fit with
+                    them, refit without them, and compare. If the forecasts diverge,
+                    trust the headline less.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">04, Numbers</p>
+              <h2 class="h2">Measured on NRB data.</h2>
+            </div>
+            <div class="stats" data-reveal>
+              <div>
+                <p class="stat__value">13,263</p>
+                <p class="stat__label">public daily training observations before 2026-01-01</p>
+              </div>
+              <div>
+                <p class="stat__value">0.322</p>
+                <p class="stat__label">14-day mean pinball loss on the held-out window</p>
+              </div>
+              <div>
+                <p class="stat__value">0.72</p>
+                <p class="stat__label">14-day p10-p90 interval coverage on the held-out window</p>
+              </div>
+              <div>
+                <p class="stat__value">0.542</p>
+                <p class="stat__label">14-day random-walk baseline mean pinball loss</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">05</p>
+              <h2 class="h3">Limits, stated plainly</h2>
+            </div>
+            <div class="prose">
+              <ul>
+                <li>The position book is synthetic until a live Convert Later feed replaces it. Exposure and VaR numbers scale from that placeholder book today.</li>
+                <li>Annual volume ($100M), Convert Later share (15%), idle Nostro ($5M), and similar inputs are editable placeholders in the UI, not confirmed operator figures.</li>
+                <li>NRB rate refresh is a manual browser export today. A licensed feed or daily export workflow is needed to keep risk stats current.</li>
+                <li>Quantile coverage at 0.87 misses the 0.90 target. I would not size hedges off the band alone without monitoring drift.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-quint.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Quint <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
