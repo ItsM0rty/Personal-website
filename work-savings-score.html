@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Savings score stress test | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: a synthetic stress test of a savings score for bars, including an audit of the headline findings." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <a class="case-back" href="work.html" data-hero-item>&larr; All work</a>
+          <p class="label" data-hero-item>Research, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Savings score stress test</h1>
+          <p class="lede" data-hero-item>
+            A simulation of what happens when bars optimize toward a savings score of the kind
+            insurance-tech vendors advertise.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div><dt class="label">Role</dt><dd>Simulation, analysis, and independent audit.</dd></div>
+            <div><dt class="label">Stack</dt><dd>Python, pandas, NumPy, scikit-learn, matplotlib</dd></div>
+            <div><dt class="label">Design</dt><dd>700 stress runs across 20 seeds, with byte-identical reruns.</dd></div>
+            <div><dt class="label">Data boundary</dt><dd>Only NYC feature distributions are real. Premiums and losses are generated.</dd></div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">01</p><h2 class="h3">What is simulated</h2></div>
+            <div class="prose">
+              <p>
+                This is not a claim about real premiums, carrier behavior, or any vendor's product.
+                The simulation has 4,000 synthetic venues. Only the distributions of NYC DOHMH
+                critical inspection violations and NYS SLA on-premises liquor licenses by ZIP are
+                real. Every other feature, latent variable, premium, claim, loss, and adoption
+                decision is generated.
+              </p>
+              <p>
+                A hidden management-quality variable affects both loss and observable proxies such
+                as cameras and paperwork. A carrier fits a Tweedie GLM to observable features; a
+                monotone gradient-boosting score estimates premium reductions from operational
+                changes. Venues take their top three recommended actions, then the carrier refits
+                over ten periods.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">02</p><h2 class="h3">What the baseline showed</h2></div>
+            <div class="prose">
+              <p>
+                At the baseline setting, 24.5% [18.6, 36.2%] of summed action promises came from
+                cameras and paperwork, which have zero true effect in the model. At 50% adoption,
+                venues were promised a 27.2% reduction and realized 24.9% at period one; by period
+                ten they realized 20.0% [17.2, 24.7%] while true loss fell 25.9%.
+              </p>
+              <p>
+                A high apparent recovery at full adoption was not evidence that the score became
+                correct. At p = 100%, promise kept was 0.961 at period ten because the claims
+                window had no unmoved venue-years left. The carrier re-learned a confounded training
+                coefficient of about -1.54 against a true value of -0.60.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side"><p class="label">03</p><h2 class="h3">What survived the audit</h2></div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Identification</span>
+                  <h3>The full-adoption recovery was not a rebalancing effect</h3>
+                  <p>Promise kept was identical across rebalancing modes to numerical precision. Across the 25-cell tuning grid, kept at p = 1 exceeded p = 0.5 by 0.10 to 0.40 in every seed. The audit attributes this to window composition and shared adoption targets.</p>
+                </div>
+                <div class="incident">
+                  <span class="label">Observability</span>
+                  <h3>Correction needed an almost direct management signal</h3>
+                  <p>At correlation 0.71, the camera coefficient remained -0.35 to -0.43 and only 3 of 20 seeds corrected within ten periods under the looser band. At about 0.97 correlation, 12 to 16 of 20 seeds corrected within ten periods depending on adoption.</p>
+                </div>
+                <div class="incident">
+                  <span class="label">Tuning</span>
+                  <h3>Proxy attribution held, calibration did not</h3>
+                  <p>Across the cap and tempering grid, proxy actions made 20.2 to 30.1% of promised savings and the proxy-heavy versus causal-only gap remained 16.5 to 23.9 percentage points. Bundle calibration held only at the chosen tuning, with promised-minus-true gaps from -8.3 to +24.6 percentage points.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal><p class="label">04, Audit figures</p><h2 class="h2">Stress-tested claims, not product performance.</h2></div>
+            <div class="prose" data-reveal style="max-width: 100%">
+              <img src="images/research/a1_full_adoption.png" alt="Audit chart showing promise kept across adoption rates and rebalancing modes." style="display: block; width: 100%; height: auto; border: 1px solid var(--line)" />
+              <img src="images/research/a2_observability.png" alt="Audit chart showing the effect of management-quality proxy observability on correction." style="display: block; width: 100%; height: auto; border: 1px solid var(--line)" />
+              <img src="images/research/a3_tuning_grid.png" alt="Audit chart summarizing sensitivity across the credit-cap and tempering grid." style="display: block; width: 100%; height: auto; border: 1px solid var(--line)" />
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="stats" data-reveal>
+              <div><p class="stat__value">700</p><p class="stat__label">stress runs in the complete study</p></div>
+              <div><p class="stat__value">20</p><p class="stat__label">seeds per reported sweep</p></div>
+              <div><p class="stat__value">20-30%</p><p class="stat__label">proxy share of action promises across the tuning grid</p></div>
+              <div><p class="stat__value">0.69</p><p class="stat__label">baseline Spearman score to true loss-cut ranking</p></div>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-flamide.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Flamide <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>

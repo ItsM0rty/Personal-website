@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Representation alignment | Suyash Bhattarai</title>
+    <meta name="description" content="Case study: reproducing an embedding alignment reference, then testing unsupervised alignment between independently trained toy encoders." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <a class="case-back" href="work.html" data-hero-item>&larr; All work</a>
+          <p class="label" data-hero-item>Research, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>Representation alignment</h1>
+          <p class="lede" data-hero-item>
+            A toy-scale test of unsupervised alignment between two independently trained
+            encoders, with controls and held-out retrieval checks.
+          </p>
+          <dl class="meta" data-hero-item>
+            <div><dt class="label">Role</dt><dd>Research design, implementation, and analysis.</dd></div>
+            <div><dt class="label">Stack</dt><dd>Python, PyTorch, NumPy, SciPy, scikit-learn</dd></div>
+            <div><dt class="label">Protocol</dt><dd>Held-out retrieval, unrelated-encoder control, and diagnostics.</dd></div>
+            <div><dt class="label">Scope</dt><dd>Synthetic scenes and independently trained toy encoders.</dd></div>
+          </dl>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">01</p><h2 class="h3">Start with the reference</h2></div>
+            <div class="prose">
+              <p>
+                Before changing the setup, I reproduced the reference alignment pipeline on its
+                real embedding pair. My run reached 96.37% top-1 retrieval accuracy. The recorded
+                published result was 96.01%, and the official run in the project log was 96.008%.
+              </p>
+              <p>
+                The implementation centers and normalizes each space, constructs relative
+                representations, obtains an initial correspondence with clustered similarity
+                structure and QAP restarts, then fits an orthogonal Procrustes map. Two refinement
+                stages alternate nearest-neighbor matches and map updates.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">02</p><h2 class="h3">Independent encoders</h2></div>
+            <div class="prose">
+              <p>
+                I trained two encoders on the same toy scene distribution with different objectives,
+                then evaluated only on a held-out split. The first non-overlapping alignment result
+                was a null: 0.0% top-1 retrieval, mean matched-pair cosine -0.0067, and 1.25%
+                shape accuracy. The unrelated control was similarly null.
+              </p>
+              <p>
+                The diagnostic identified mean-centering as the main failure mode for these
+                embeddings. With L2 normalization only and paired training rows, stage-one mean
+                cosine was 0.6629, with 93.1% above 0.5. The full held-out result reached mean
+                matched-pair cosine 0.4988 and 71.83% shape accuracy, while the unrelated control
+                reached 0.0067 cosine and 23.67% shape accuracy.
+              </p>
+              <p>
+                I then tested relative representations with parallel anchors. Its best
+                independent-encoder run reached 77.31% shape accuracy and 0.7103 mean cosine,
+                compared with 19.89% shape accuracy and 0.00009 mean cosine for its unrelated
+                control. Exact top-1 retrieval remained low at 0.39%, so the result is evidence
+                of recovered category structure rather than item identity.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+              <div class="chapter__side"><p class="label">03</p><h2 class="h3">Checks before interpreting it</h2></div>
+              <div class="prose" style="max-width: 44rem">
+                <div class="incident">
+                  <span class="label">Leakage</span>
+                  <h3>Split and control checks</h3>
+                  <p>The train and evaluation scene indices were separated, and an unrelated-encoder control was carried through each alignment run. The write verification recorded a clean result.</p>
+                </div>
+                <div class="incident">
+                  <span class="label">Anchors</span>
+                  <h3>Procrustes was not enough for identity retrieval</h3>
+                  <p>With 1,000 anchors, direct Procrustes alignment averaged 1.72% exact top-1 retrieval but 95.03% shape accuracy and 0.6902 mean cosine. It recovered coarse structure, not individual identity.</p>
+                </div>
+                <div class="incident">
+                  <span class="label">Self alignment</span>
+                  <h3>Known rotation behaved differently</h3>
+                  <p>Aligning an encoder to a rotated copy produced 32.5% top-1, 0.8553 mean cosine, and 100% shape accuracy. An unrelated control remained at 0.0% top-1 and 0.0055 cosine.</p>
+                </div>
+                <div class="incident">
+                  <span class="label">Refinement</span>
+                  <h3>The proxy was not the outcome</h3>
+                  <p>Across refinement iterations, the best-match proxy had Pearson r = 0.4378 with held-out functional cosine and first diverged at iteration 10. I treated it as a diagnostic, not a stopping criterion.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal><p class="label">04, Result</p><h2 class="h2">Evidence for correspondence at toy scale.</h2></div>
+            <div class="stats" data-reveal>
+              <div><p class="stat__value">96.37%</p><p class="stat__label">reference reproduction top-1 accuracy</p></div>
+              <div><p class="stat__value">77.31%</p><p class="stat__label">best independent-encoder shape accuracy with relative representations</p></div>
+              <div><p class="stat__value">0.7103</p><p class="stat__label">mean cosine for that aligned pair</p></div>
+              <div><p class="stat__value">19.89%</p><p class="stat__label">shape accuracy for the corresponding unrelated control</p></div>
+            </div>
+          </div>
+        </section>
+
+        <a href="work-savings-score.html" class="next-case wrap">
+          <span class="label">Next case study</span>
+          <span class="next-case__title">Savings score stress test <span class="arrow">&rarr;</span></span>
+        </a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
