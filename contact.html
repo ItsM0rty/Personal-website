@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Contact | Suyash Bhattarai</title>
+    <meta
+      name="description"
+      content="Contact Suyash Bhattarai for roles, collaborations, or a walkthrough of any project."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <section class="hero wrap" data-hero>
+          <p class="label" data-hero-item>Contact</p>
+          <h1 class="hero__title" data-hero-item>Reach me.</h1>
+          <div data-hero-item>
+            <a href="mailto:hey@suyashbhattarai.com.np" class="contact-big">hey@suyashbhattarai.com.np</a>
+            <p class="lede" style="margin-top: var(--space-6)">
+              For roles, collaborations, or a walkthrough of any project, email is fastest.
+            </p>
+            <div class="link-list" style="margin-top: var(--space-7)">
+              <a href="https://github.com/ItsM0rty" target="_blank" rel="noopener">
+                GitHub
+                <span class="label">github.com/ItsM0rty</span>
+              </a>
+              <a href="https://www.npmjs.com/package/@itsm0rty/quint" target="_blank" rel="noopener">
+                Quint on npm
+                <span class="label">@itsm0rty/quint</span>
+              </a>
+              <a href="mailto:hey@suyashbhattarai.com.np">
+                Email
+                <span class="label">hey@suyashbhattarai.com.np</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer is-dark">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>

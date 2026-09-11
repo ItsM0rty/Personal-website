@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            document.documentElement.classList.add("is-pixel-covered");
+          }
+          if (sessionStorage.getItem("transition") === "expand") {
+            document.documentElement.classList.add("is-expand-arrival");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>About | Suyash Bhattarai</title>
+    <meta
+      name="description"
+      content="Suyash Bhattarai is an AI engineer and full stack developer who builds LLM systems with guardrails and evals, and does forward deployed work with the people who use what he ships."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>About</p>
+          <h1 class="case-hero__title" data-hero-item>Hi, I'm Suyash.</h1>
+          <p class="lede" data-hero-item>
+            I'm an AI engineer and full stack developer. I build LLM systems with
+            guardrails and evals, and I do forward deployed work: sit with the people
+            using the system, ship what they need, and leave something the next person
+            can maintain.
+          </p>
+        </header>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">Bio</p>
+              <h2 class="h3">What I do</h2>
+            </div>
+            <div class="prose">
+              <p>
+                I build LLM systems end to end: guardrails, evaluation pipelines, and
+                the application code around them. I test against live providers and write
+                evals that say what they cannot claim.
+              </p>
+              <p>
+                At Anterra Corp I fine-tuned YOLOv8m and integrated BoT-SORT tracking on
+                Jetson Orin Nano edge hardware. I built a custom Nepali Devanagari ANPR
+                model and demonstrated the traffic violation detection system to senior
+                police and ministry officials.
+              </p>
+              <p>
+                On freelance projects I work directly with the people using the software.
+                I have sat with factory workers to refine inventory workflows and with
+                school administrators and teachers to fix bugs in an academic management
+                system.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">Honors</p>
+              <h2 class="h2">Recognition.</h2>
+            </div>
+            <div class="stats" data-reveal>
+              <div>
+                <p class="stat__value">World 2nd</p>
+                <p class="stat__label">Cambridge International A-Level Computer Science, also Nepal Top</p>
+              </div>
+              <div>
+                <p class="stat__value">1540</p>
+                <p class="stat__label">SAT, 99th percentile</p>
+              </div>
+              <div>
+                <p class="stat__value">A* A*</p>
+                <p class="stat__label">Computer Science and Mathematics A-Levels</p>
+              </div>
+              <div>
+                <p class="stat__value">1,500+</p>
+                <p class="stat__label">students reached through WIZ, the computer literacy nonprofit I founded</p>
+              </div>
+            </div>
+            <div class="prose" data-reveal style="margin-top: var(--space-7)">
+              <ul>
+                <li>Best Academic Performance Award and AS Level Topper at Budhanilkantha School</li>
+                <li>National Economics Olympiad Finalist</li>
+                <li>Best Delegate twice at BNKS Model UN</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">Experience</p>
+              <h2 class="h2">Where I've worked.</h2>
+            </div>
+            <div class="timeline">
+              <div class="timeline__item" data-reveal>
+                <p class="label">Jul 2026 to Sep 2026</p>
+                <h3 class="h3">Lead Engineer, Flamide</h3>
+                <p>
+                  Designed and developed the core architecture of an AI-native CRM using
+                  Next.js, Supabase, and DeepSeek, with multi-tenant data isolation,
+                  real-time business-data grounding, AI guardrails, and cost- and
+                  latency-optimized model routing.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">Aug 2025 to Jul 2026</p>
+                <h3 class="h3">Co-Founder and Lead AI Engineer, Anterra Corp (Karma)</h3>
+                <p>
+                  Built an AI-powered traffic violation detection system by fine-tuning
+                  YOLOv8m and integrating BoT-SORT tracking on Jetson Orin Nano edge
+                  hardware. Developed a custom Nepali Devanagari ANPR model and
+                  demonstrated the system to senior police and ministry officials.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">2024 to 2026</p>
+                <h3 class="h3">Founder, World of IT Zealots (WIZ)</h3>
+                <p>
+                  Founded and led a computer literacy initiative reaching 1,500+ students
+                  across underserved schools. Developed a self-directed digital literacy
+                  curriculum, delivered training to 600+ students, and built AI integrated
+                  interactive modules with custom harness and context optimizations.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">2022 to now</p>
+                <h3 class="h3">Freelance Web Developer</h3>
+                <p>
+                  Built a bank credit reward system with event-driven Java/Spring Boot and
+                  Python architecture, a factory operations and inventory management system
+                  for real-time tracking and production scheduling, and an academic and
+                  administrative management system for student progress and teacher-facing
+                  workflows.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">Oct 2024 to Dec 2024</p>
+                <h3 class="h3">Intern, IM Swedish Development Partner</h3>
+                <p>
+                  Researched policy implementation gaps affecting freed Kamaiyas and
+                  Kamlaris. Revamped the Freed Kamalari Development Forum website,
+                  improved digital outreach materials, and developed a crowdfunding
+                  strategy with donation buttons, QR codes, and international donor
+                  engagement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">Research and education</p>
+              <h2 class="h2">Background.</h2>
+            </div>
+            <div class="timeline">
+              <div class="timeline__item" data-reveal>
+                <p class="label">Independent research</p>
+                <h3 class="h3">Testing the Platonic Representation Hypothesis at toy scale</h3>
+                <p>
+                  Reproduced a reference representation-alignment method from paper
+                  descriptions and matched the published result, 96.37% vs 96.01%.
+                  Recovered unsupervised alignment from a null result to 77.3% through
+                  preprocessing corrections and a second unsupervised method.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">Education</p>
+                <h3 class="h3">Budhanilkantha School, Cambridge International A-Levels</h3>
+                <p>
+                  Computer Science A*, Mathematics A*, Economics A, Business A, English
+                  General Paper A.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">2025</p>
+                <h3 class="h3">Certifications, DeepLearning.AI and Stanford</h3>
+                <p>
+                  Advanced Learning Algorithms and Supervised Machine Learning: Regression
+                  and Classification.
+                </p>
+              </div>
+              <div class="timeline__item" data-reveal>
+                <p class="label">Sep 2025</p>
+                <h3 class="h3">Research Assistant, Access Planet Nepal</h3>
+                <p>
+                  Co-authored a publication in Sambahak: Human Rights Journal.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section is-dark">
+          <div class="wrap">
+            <div class="section-head" data-reveal>
+              <p class="label">Skills</p>
+              <h2 class="h2">What I reach for.</h2>
+            </div>
+            <div class="skills">
+              <div data-reveal>
+                <h3 class="h3">AI and ML</h3>
+                <ul>
+                  <li>Python, PyTorch</li>
+                  <li>YOLOv8, BoT-SORT</li>
+                  <li>Computer vision, ANPR</li>
+                  <li>LLM evaluation pipelines</li>
+                  <li>AI guardrails and grounding</li>
+                  <li>Model evaluation and validation</li>
+                  <li>scikit-learn, pandas, NumPy</li>
+                  <li>Representation learning</li>
+                  <li>Edge AI deployment</li>
+                  <li>Machine learning, model fine-tuning</li>
+                </ul>
+              </div>
+              <div data-reveal>
+                <h3 class="h3">Backend and data</h3>
+                <ul>
+                  <li>FastAPI, SQLAlchemy</li>
+                  <li>Supabase, PostgreSQL</li>
+                  <li>Row-level security</li>
+                  <li>REST APIs</li>
+                  <li>Multi-tenant architecture</li>
+                  <li>Java, Spring Boot</li>
+                  <li>Real-time data systems</li>
+                  <li>Database design and data modeling</li>
+                  <li>Authentication and RBAC</li>
+                  <li>Node.js, TypeScript</li>
+                </ul>
+              </div>
+              <div data-reveal>
+                <h3 class="h3">Frontend and tooling</h3>
+                <ul>
+                  <li>Next.js, React</li>
+                  <li>HTML and CSS</li>
+                  <li>Docker</li>
+                  <li>CI/CD, GitHub Actions</li>
+                  <li>pytest, automated testing</li>
+                  <li>Linux</li>
+                  <li>System design</li>
+                  <li>API integration</li>
+                  <li>Technical documentation</li>
+                  <li>JavaScript</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">Languages</p>
+            </div>
+            <div class="prose">
+              <p>English (fluent), Nepali (native), Hindi (proficient).</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap" data-reveal>
+            <p class="label">Contact</p>
+            <h2 class="h2" style="margin-block: var(--space-4) var(--space-7)">
+              Want to talk through a project?
+            </h2>
+            <div class="actions">
+              <a href="contact.html" class="btn btn--solid">Get in touch <span class="arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer is-dark">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="expand-overlay" aria-hidden="true"></div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
