@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalgate Demo | Suyash Bhattarai</title>
+    <meta name="description" content="Browser demo of Evalgate, a Rust evaluation gate for recorded model outputs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="demos/evalgate/demo.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="demo-hero wrap" data-hero>
+          <p class="label" data-hero-item>Live demo</p>
+          <h1 class="demo-hero__title" data-hero-item>Evalgate</h1>
+          <p class="lede" data-hero-item>
+            Run a YAML suite against recorded model outputs. Compare weighted check
+            scores, inspect regressions, and view repeat-based flaky classification.
+          </p>
+        </header>
+
+        <section class="wrap">
+          <div class="demo-controls" data-reveal>
+            <div class="demo-presets">
+              <button type="button" class="demo-preset is-active" data-preset="support">Support bot</button>
+              <button type="button" class="demo-preset" data-preset="regression">Regression</button>
+              <button type="button" class="demo-preset" data-preset="flaky">Flaky</button>
+            </div>
+            <div class="demo-actions">
+              <button type="button" class="demo-action demo-action--solid" id="run">Run suite</button>
+              <button type="button" class="demo-action demo-action--outline" id="compare">Compare with baseline</button>
+            </div>
+            <span class="demo-status" id="status" aria-live="polite"></span>
+          </div>
+
+          <div id="error" class="demo-error" hidden></div>
+
+          <div class="demo-layout" data-reveal>
+            <div class="demo-panel">
+              <div class="demo-panel__head">
+                <span class="demo-panel__label">Eval config (YAML)</span>
+              </div>
+              <textarea class="demo-editor" id="config" spellcheck="false" aria-label="Eval config YAML"></textarea>
+            </div>
+            <div class="demo-panel">
+              <div class="demo-panel__head">
+                <span class="demo-panel__label">Recorded outputs (JSON)</span>
+              </div>
+              <textarea class="demo-editor" id="outputs" spellcheck="false" aria-label="Recorded outputs JSON"></textarea>
+            </div>
+          </div>
+
+          <div class="demo-results" id="results" data-reveal></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="demos/evalgate/demo.js"></script>
+  </body>
+</html>
