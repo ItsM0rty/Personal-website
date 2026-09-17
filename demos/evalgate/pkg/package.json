@@ -1,0 +1,20 @@
+{
+  "name": "evalgate-wasm",
+  "type": "module",
+  "collaborators": [
+    "Suyash Bhattarai"
+  ],
+  "description": "Browser bindings for deterministic Evalgate checks",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "evalgate_wasm_bg.wasm",
+    "evalgate_wasm.js",
+    "evalgate_wasm.d.ts"
+  ],
+  "main": "evalgate_wasm.js",
+  "types": "evalgate_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
