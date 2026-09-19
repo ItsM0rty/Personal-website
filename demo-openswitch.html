@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Switch demo | Suyash Bhattarai</title>
+    <meta name="description" content="Interactive routing simulation for latency, circuit breakers, and hedged requests." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="demos/openswitch/demo.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary"><div class="wrap nav__inner"><a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a><ul class="nav__links"><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+      <main id="main">
+        <header class="demo-hero wrap" data-hero>
+          <p class="label" data-hero-item>Live demo</p>
+          <h1 class="case-hero__title" data-hero-item>Open Switch routing simulator</h1>
+          <p class="lede" data-hero-item>Change provider conditions, then see EWMA routing, circuit-breaker state, and hedged attempts play out in the browser.</p>
+          <div class="actions" data-hero-item><a href="work-openswitch.html" class="btn">Read the case study <span class="arrow">&rarr;</span></a></div>
+        </header>
+        <section class="wrap">
+          <div class="demo-grid">
+            <div class="demo-panel" data-reveal>
+              <h2>Deployments</h2>
+              <div id="providers"></div>
+              <div class="demo-controls">
+                <div class="field"><label for="strategy">Routing strategy</label><select id="strategy"><option value="balanced">Balanced</option><option value="lowest_latency">Lowest EWMA latency</option><option value="cost_aware">Cost aware</option></select></div>
+                <label class="toggle"><input id="hedging" type="checkbox" checked /> Hedge slow requests</label>
+                <label class="toggle"><input id="breaker" type="checkbox" checked /> Circuit breaker</label>
+                <div class="demo-actions"><button id="run" class="btn btn--solid" type="button">Send 200 requests</button><span id="status" class="demo-status">Loading simulator.</span></div>
+              </div>
+              <p class="demo-note">A run uses a deterministic seed. The hedge delay is 140 ms and a breaker opens after three failures.</p>
+            </div>
+            <div class="demo-panel" data-reveal>
+              <h2>Results</h2>
+              <div id="stats" class="stats-grid"></div>
+              <div class="histogram"><p class="label">Latency distribution</p><div id="histogram" class="histogram__bars"></div></div>
+              <div class="provider-share"><p class="label">Deployment state</p><ul id="share"></ul></div>
+              <p class="label log-label">Decision trace</p><div id="log" class="demo-log" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"><div class="wrap footer__inner"><span>&copy; 2026 Suyash Bhattarai</span><a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a></div></footer>
+    </div>
+    <div class="load_grid" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="demos/openswitch/demo.js"></script>
+  </body>
+</html>
