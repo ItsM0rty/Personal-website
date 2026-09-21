@@ -1,0 +1,20 @@
+{
+  "name": "openswitch-wasm",
+  "type": "module",
+  "collaborators": [
+    "Suyash Bhattarai"
+  ],
+  "description": "WASM bindings for Open Switch routing simulation",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "openswitch_wasm_bg.wasm",
+    "openswitch_wasm.js",
+    "openswitch_wasm.d.ts"
+  ],
+  "main": "openswitch_wasm.js",
+  "types": "openswitch_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
