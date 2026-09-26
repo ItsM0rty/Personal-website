@@ -1,0 +1,19 @@
+{
+  "name": "screener-wasm",
+  "type": "module",
+  "collaborators": [
+    "Suyash Bhattarai"
+  ],
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "screener_wasm_bg.wasm",
+    "screener_wasm.js",
+    "screener_wasm.d.ts"
+  ],
+  "main": "screener_wasm.js",
+  "types": "screener_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
