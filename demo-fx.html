@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Corridor FX demo | Suyash Bhattarai</title>
+    <meta name="description" content="Interactive USD to NPR forecast band and hedge calculator." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="demos/fx/demo.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary"><div class="wrap nav__inner"><a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a><ul class="nav__links"><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+      <main id="main">
+        <header class="demo-hero wrap" data-hero>
+          <p class="label" data-hero-item>Live demo</p>
+          <h1 class="case-hero__title" data-hero-item>Corridor FX</h1>
+          <p class="lede" data-hero-item>Held-out USD/NPR proxy forecasts and an in-browser hedge calculator for a US to Nepal remittance operator.</p>
+          <div class="actions" data-hero-item><a href="work-fx.html" class="btn">Read the case study <span class="arrow">&rarr;</span></a></div>
+        </header>
+        <section class="wrap fx-demo" aria-label="Forecast and hedge demo">
+          <div class="fx-panel" data-reveal>
+            <div class="fx-panel__head"><div><p class="label">Forecast fan</p><h2 class="h3" id="forecast-title">Loading forecast</h2></div><p class="fx-note">p10 to p90 is a prediction interval, not a price target.</p></div>
+            <svg id="fan-chart" viewBox="0 0 760 330" role="img" aria-label="Forecast fan chart"></svg>
+            <label class="fx-scrub" for="date-scrubber"><span>Test date <output id="date-out"></output></span><input id="date-scrubber" type="range" min="0" value="0" /><span id="rate-out"></span></label>
+          </div>
+          <div class="fx-grid">
+            <form class="fx-panel fx-calc" id="hedge-form" data-reveal>
+              <div class="fx-panel__head"><div><p class="label">Hedge calculator</p><h2 class="h3">Size the exposure</h2></div></div>
+              <label>Daily remittance volume, USD<input id="volume" type="number" min="1000" step="1000" value="100000"></label>
+              <label>Days of exposure <input id="days" type="range" min="1" max="14" value="7"><output id="days-out">7 days</output></label>
+              <label>Hedge cost per day, bps <input id="cost" type="number" min="0" step="0.1" value="0.8"></label>
+              <label>Risk tolerance, USD <input id="tolerance" type="number" min="0" step="100" value="500"></label>
+              <div class="fx-results" aria-live="polite"><div><span>Recommended hedge ratio</span><strong id="hedge-ratio">-</strong></div><div><span>Expected hedge cost</span><strong id="hedge-cost">-</strong></div><div><span>Worst-case p10 loss, unhedged</span><strong id="loss-open">-</strong></div><div><span>Worst-case p10 loss, hedged</span><strong id="loss-hedged">-</strong></div></div>
+            </form>
+            <section class="fx-panel" data-reveal><div class="fx-panel__head"><div><p class="label">Held-out backtest</p><h2 class="h3">Quantile accuracy</h2></div></div><div id="metrics" class="fx-metrics"></div><p class="fx-note" id="source-note"></p></section>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"><div class="wrap footer__inner"><span>&copy; 2026 Suyash Bhattarai</span><a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a></div></footer>
+    </div>
+    <div class="load_grid" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="demos/fx/demo.js"></script>
+  </body>
+</html>

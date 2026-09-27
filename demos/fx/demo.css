@@ -1,0 +1,23 @@
+.demo-hero { padding-block: calc(var(--nav-h) + var(--space-8)) var(--space-8); }
+.fx-demo { display: grid; gap: var(--space-5); padding-block: var(--space-7) var(--space-9); }
+.fx-panel { padding: var(--space-5); border: 1px solid var(--line); background: var(--beige-dim); }
+.fx-panel__head { display: flex; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
+.fx-panel h2 { margin: 0; }
+.fx-note { max-width: 25rem; font-family: var(--font-mono); font-size: .72rem; color: var(--ink-faint); }
+#fan-chart { display: block; width: 100%; border: 1px solid var(--line); background: var(--beige); }
+.fx-scrub { display: grid; gap: var(--space-2); margin-top: var(--space-4); font-family: var(--font-mono); font-size: .75rem; }
+.fx-scrub span { display: flex; justify-content: space-between; }
+.fx-scrub input { width: 100%; accent-color: var(--green); }
+.fx-grid { display: grid; gap: var(--space-5); }
+.fx-calc { display: grid; gap: var(--space-4); }
+.fx-calc label { display: grid; gap: var(--space-2); font-size: .85rem; }
+.fx-calc input { width: 100%; padding: var(--space-2) var(--space-3); font: inherit; border: 1px solid var(--line); background: var(--beige); border-radius: 0; }
+.fx-results { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); margin-top: var(--space-2); }
+.fx-results div { padding: var(--space-3); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.fx-results span { display: block; font-size: .72rem; color: var(--ink-soft); }
+.fx-results strong { font-family: var(--font-mono); font-size: .9rem; }
+.fx-metrics { display: grid; gap: var(--space-3); }
+.fx-metric { display: grid; grid-template-columns: 3rem 1fr 1fr; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: .72rem; }
+.fx-metric span:last-child { text-align: right; }
+@media (min-width: 48rem) { .fx-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 36rem) { .fx-panel__head { display: grid; } .fx-results { grid-template-columns: 1fr; } }
