@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quint live demo | Suyash Bhattarai</title>
+    <meta name="description" content="An interactive Quint demo showing the model input, user-visible result, and render location for each decision." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="demos/quint/demo.css" />
+    <noscript><style>.load_grid { display: none; }</style></noscript>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react/": "https://esm.sh/react@18.3.1/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="demo-hero wrap" data-hero>
+          <p class="label" data-hero-item>Live demo</p>
+          <h1 class="case-hero__title" data-hero-item>Quint decisions in a chat UI</h1>
+          <p class="lede" data-hero-item>
+            Click a decision, then inspect the exact structured input, visible result,
+            and render location. Each button has an explicit contract.
+          </p>
+          <div class="actions" data-hero-item>
+            <a href="work-quint.html" class="btn">Read the case study <span class="arrow">&rarr;</span></a>
+          </div>
+        </header>
+
+        <section class="wrap quint-demo" aria-label="Interactive Quint demonstration">
+          <div id="quint-root" data-reveal></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="demos/quint/demo.js"></script>
+  </body>
+</html>
