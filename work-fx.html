@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
       (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
         try {
           if (sessionStorage.getItem("pixel-transition") === "arriving") {
-            document.documentElement.classList.add("is-pixel-covered");
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
           }
-          if (sessionStorage.getItem("transition") === "expand") {
-            document.documentElement.classList.add("is-expand-arrival");
-          }
-        } catch (e) {}
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
       })();
     </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
     <title>Corridor FX | Suyash Bhattarai</title>
     <meta name="description" content="Case study: an operational intelligence dashboard for a US to Nepal remittance operator, quantifying Convert Later FX exposure and forecasting risk bands on a managed peg." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components.css" />
-    <noscript><style>.load_grid { display: none; }</style></noscript>
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -234,8 +242,6 @@
         </div>
       </footer>
     </div>
-
-    <div class="expand-overlay" aria-hidden="true"></div>
     <div class="load_grid" aria-hidden="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>

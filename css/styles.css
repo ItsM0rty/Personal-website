@@ -50,6 +50,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html.js-anim [data-hero-item],
+html.js-anim [data-reveal] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+html.is-quick-arrival main {
+  opacity: 0;
+  visibility: hidden;
+}
+
 body {
   font-family: var(--font-sans);
   font-size: clamp(1rem, 0.35vw + 0.9rem, 1.125rem);
@@ -469,6 +480,10 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+}
+
+.case-hero > .actions {
+  margin-top: var(--space-4);
 }
 
 .btn {
@@ -1034,6 +1049,13 @@ a:hover .arrow {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.js-anim [data-hero-item],
+  html.js-anim [data-reveal],
+  html.is-quick-arrival main {
+    opacity: 1;
+    visibility: visible;
+  }
+
   html {
     scroll-behavior: auto;
   }

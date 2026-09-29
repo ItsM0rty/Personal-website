@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
       (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
         try {
           if (sessionStorage.getItem("pixel-transition") === "arriving") {
-            document.documentElement.classList.add("is-pixel-covered");
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
           }
-          if (sessionStorage.getItem("transition") === "expand") {
-            document.documentElement.classList.add("is-expand-arrival");
-          }
-        } catch (e) {}
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
       })();
     </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
     <title>Work | Suyash Bhattarai</title>
     <meta
       name="description"
@@ -28,7 +36,7 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components.css" />
-    <noscript><style>.load_grid { display: none; }</style></noscript>
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -74,37 +82,37 @@
             <div class="project-grid" data-reveal>
               <article class="project-card project-card--has-demo" data-category="ai fde">
                 <div class="project-card__top"><span class="project-card__num">01</span><a class="project-card__demo btn" href="demo-openswitch.html">Live demo</a></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-openswitch.html" data-transition="expand">Open Switch</a></h3><p class="project-card__desc">LLM gateway with circuit breakers, half-open probes, hedged requests, cost-aware routing, per-key budgets, and request traces.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-openswitch.html">Open Switch</a></h3><p class="project-card__desc">LLM gateway with circuit breakers, half-open probes, hedged requests, cost-aware routing, per-key budgets, and request traces.</p></div>
                 <ul class="tags"><li>Rust</li><li>Tokio</li><li>Axum</li><li>WASM</li></ul>
               </article>
               <article class="project-card project-card--has-demo" data-category="ai">
                 <div class="project-card__top"><span class="project-card__num">02</span><a class="project-card__demo btn" href="demo-screener.html">Live demo</a></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-screener.html" data-transition="expand">Screener</a></h3><p class="project-card__desc">Typo tolerant hybrid search with faceted filters that runs fully in the browser.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-screener.html">Screener</a></h3><p class="project-card__desc">Typo tolerant hybrid search with faceted filters that runs fully in the browser.</p></div>
                 <ul class="tags"><li>Rust</li><li>BM25</li><li>FST</li><li>WebAssembly</li></ul>
               </article>
               <article class="project-card project-card--has-demo" data-category="ai fde">
                 <div class="project-card__top"><span class="project-card__num">03</span><a class="project-card__demo btn" href="demo-evalgate.html">Live demo</a></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-evalgate.html" data-transition="expand">Evalgate</a></h3><p class="project-card__desc">LLM evaluation runner with its own YAML check format, flakiness detection, and a pull request gate that writes a Markdown report.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-evalgate.html">Evalgate</a></h3><p class="project-card__desc">LLM evaluation runner with its own YAML check format, flakiness detection, and a pull request gate that writes a Markdown report.</p></div>
                 <ul class="tags"><li>Rust</li><li>CLI</li><li>YAML</li><li>WASM</li></ul>
               </article>
               <article class="project-card project-card--has-demo" data-category="ai fde">
                 <div class="project-card__top"><span class="project-card__num">04</span><a class="project-card__demo btn" href="demo-fx.html">Live demo</a></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-fx.html" data-transition="expand">Corridor FX</a></h3><p class="project-card__desc">FX exposure and hedging engine with a quantile forecast that is honest about what it cannot predict.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-fx.html">Corridor FX</a></h3><p class="project-card__desc">FX exposure and hedging engine with a quantile forecast that is honest about what it cannot predict.</p></div>
                 <ul class="tags"><li>Python</li><li>XGBoost</li><li>FastAPI</li><li>React</li></ul>
               </article>
               <article class="project-card" data-category="ai fde fullstack">
                 <div class="project-card__top"><span class="project-card__num">05</span><span class="project-card__status">Case study</span></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-flamide.html" data-transition="expand">Flamide</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-flamide.html">Flamide</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.</p></div>
                 <ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Supabase</li><li>DeepSeek</li></ul>
               </article>
               <article class="project-card" data-category="ai fullstack">
                 <div class="project-card__top"><span class="project-card__num">06</span><span class="project-card__status">Case study</span></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-sekkin.html" data-transition="expand">Sekkin</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Schema-first code generator where deterministic structure keeps the LLM focused on application logic.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-sekkin.html">Sekkin</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3><p class="project-card__desc">Schema-first code generator where deterministic structure keeps the LLM focused on application logic.</p></div>
                 <ul class="tags"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>React Flow</li></ul>
               </article>
               <article class="project-card project-card--has-demo" data-category="ai fullstack">
                 <div class="project-card__top"><span class="project-card__num">07</span><a class="project-card__demo btn" href="demo-quint.html">Live demo</a></div>
-                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-quint.html" data-transition="expand">Quint</a></h3><p class="project-card__desc">React library for turning chat buttons into explicit decisions.</p></div>
+                <div class="project-card__body"><h3 class="project-card__title"><a class="project-card__link" href="work-quint.html">Quint</a></h3><p class="project-card__desc">React library for turning chat buttons into explicit decisions.</p></div>
                 <ul class="tags"><li>React</li><li>TypeScript</li><li>npm</li></ul>
               </article>
               <article class="project-card" data-category="ai">
@@ -113,7 +121,7 @@
                   <span class="project-card__status">Research</span>
                 </div>
                 <div class="project-card__body">
-                  <h3 class="project-card__title"><a class="project-card__link" href="work-alignment.html" data-transition="expand">Representation alignment</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-alignment.html">Representation alignment</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
                   <p class="project-card__desc">
                     Tested the Platonic Representation Hypothesis at toy scale. Reproduced a
                     reference alignment method to 96.37% against a published 96.01%, then
@@ -134,7 +142,7 @@
                   <span class="project-card__status">Research</span>
                 </div>
                 <div class="project-card__body">
-                  <h3 class="project-card__title"><a class="project-card__link" href="work-savings-score.html" data-transition="expand">Savings score stress test</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
+                  <h3 class="project-card__title"><a class="project-card__link" href="work-savings-score.html">Savings score stress test</a><span class="project-card__arrow" aria-hidden="true">&#8599;</span></h3>
                   <p class="project-card__desc">Synthetic stress test of a venue savings score, with an audit of confounding, observability, and tuning claims.</p>
                 </div>
                 <ul class="tags">
@@ -193,8 +201,6 @@
         </div>
       </footer>
     </div>
-
-    <div class="expand-overlay" aria-hidden="true"></div>
     <div class="load_grid" aria-hidden="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>

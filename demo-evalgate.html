@@ -3,6 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
+          }
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
+      })();
+    </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
     <title>Evalgate Demo | Suyash Bhattarai</title>
     <meta name="description" content="Browser demo of Evalgate, a Rust evaluation gate for recorded model outputs." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,7 +31,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="demos/evalgate/demo.css" />
-    <noscript><style>.load_grid { display: none; }</style></noscript>
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

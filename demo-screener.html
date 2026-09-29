@@ -1,5 +1,25 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Screener demo | Suyash Bhattarai</title><meta name="description" content="In-browser paper search with keyword, semantic, and fused ranking." /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" /><link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="demos/screener/demo.css" /><noscript><style>.load_grid { display: none; }</style></noscript></head>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
+          }
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
+      })();
+    </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" /><title>Screener demo | Suyash Bhattarai</title><meta name="description" content="In-browser paper search with keyword, semantic, and fused ranking." /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" /><link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="demos/screener/demo.css" /><noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript></head>
 <body><a class="skip-link" href="#main">Skip to content</a><div class="page">
 <nav class="nav" aria-label="Primary"><div class="wrap nav__inner"><a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a><ul class="nav__links"><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
 <main id="main"><header class="screener-hero wrap" data-hero><p class="label" data-hero-item>Live demo</p><h1 class="case-hero__title" data-hero-item>Screener</h1><p class="lede" data-hero-item>Search paper titles and abstracts entirely in the browser.</p><div class="actions" data-hero-item><a href="work-screener.html" class="btn">Read the case study <span class="arrow">&rarr;</span></a></div></header>

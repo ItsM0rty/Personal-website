@@ -1,191 +1,94 @@
-const EXPAND_KEY = "transition";
+const KEY = "page-transition";
+const VALUE = "quick";
 
-const EXPAND_VALUE = "expand";
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const modifiedClick = (event) =>
+  event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
 
-
-
-let arrivedFromExpand = false;
-
-
-
-if (sessionStorage.getItem(EXPAND_KEY) === EXPAND_VALUE) {
-
-  window.__expandArrival = true;
-
+function readFlag() {
+  try {
+    return sessionStorage.getItem(KEY) === VALUE;
+  } catch {
+    return false;
+  }
 }
 
-
-
-function prefersReducedMotion() {
-
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+function clearFlag() {
+  try {
+    sessionStorage.removeItem(KEY);
+  } catch {}
 }
 
-
-
-function isModifiedClick(event) {
-
-  return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
-
+function setFlag() {
+  try {
+    sessionStorage.setItem(KEY, VALUE);
+  } catch {}
 }
 
-
-
-function getOverlay() {
-
-  return document.querySelector(".expand-overlay");
-
+function isQuickLink(anchor) {
+  if (anchor.closest(".nav") || anchor.hasAttribute("data-no-transition")) return false;
+  const href = anchor.getAttribute("href");
+  if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+  if (anchor.target === "_blank" || anchor.hasAttribute("download")) return false;
+  try {
+    return new URL(href, window.location.href).origin === window.location.origin;
+  } catch {
+    return false;
+  }
 }
 
+export function initCaseTransition(onReady) {
+  const arriving = readFlag();
+  clearFlag();
 
-
-function insetClip(rect) {
-
-  return `inset(${rect.top}px ${window.innerWidth - rect.right}px ${window.innerHeight - rect.bottom}px ${rect.left}px round 8px)`;
-
-}
-
-
-
-function prefetch(anchor) {
-
-  const href = anchor.href;
-
-  if (!href || document.head.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
-
-
-
-  const link = document.createElement("link");
-
-  link.rel = "prefetch";
-
-  link.href = href;
-
-  document.head.appendChild(link);
-
-}
-
-
-
-export function cameFromExpand() {
-
-  return arrivedFromExpand || window.__expandArrival === true;
-
-}
-
-
-
-export function initCaseTransition() {
-
-  const overlay = getOverlay();
-
-  if (!overlay) return;
-
-
-
-  if (sessionStorage.getItem(EXPAND_KEY) === EXPAND_VALUE) {
-
-    sessionStorage.removeItem(EXPAND_KEY);
-
-    arrivedFromExpand = true;
-
-    document.documentElement.classList.remove("is-expand-arrival");
-
-
-
-    if (prefersReducedMotion()) {
-
-      overlay.classList.remove("is-active");
-
-      gsap.set(overlay, { clearProps: "clipPath" });
-
-    } else {
-
-      overlay.classList.add("is-active");
-
-      gsap.set(overlay, { clipPath: "inset(0 0 0 0)" });
-
-      gsap.to(overlay, {
-
-        clipPath: "inset(0 0 100% 0)",
-
-        duration: 0.22,
-
-        ease: "power3.inOut",
-
-        onComplete: () => {
-
-          overlay.classList.remove("is-active");
-
-          gsap.set(overlay, { clearProps: "clipPath" });
-
-        },
-
+  if (arriving) {
+    document.documentElement.classList.remove("is-quick-arrival");
+    if (reducedMotion() || typeof gsap === "undefined") onReady();
+    else {
+      gsap.fromTo("main", { autoAlpha: 0, y: 8 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.2,
+        ease: "power2.out",
+        onComplete: onReady,
       });
-
     }
-
+  } else {
+    document.documentElement.classList.remove("is-quick-arrival");
   }
 
-
-
-  document.addEventListener("pointerenter", (event) => {
-
-    const anchor = event.target.closest('a[data-transition="expand"]');
-
-    if (anchor) prefetch(anchor);
-
-  }, true);
-
-
-
   document.addEventListener("click", (event) => {
-
-    const anchor = event.target.closest('a[data-transition="expand"]');
-
-    if (!anchor || isModifiedClick(event) || prefersReducedMotion()) return;
-
-
-
+    const anchor = event.target.closest("a");
+    if (!anchor || !isQuickLink(anchor) || event.defaultPrevented || modifiedClick(event)) return;
     event.preventDefault();
-
-    const card = anchor.closest(".project-card");
-
-    const rect = (card || anchor).getBoundingClientRect();
-
     const destination = anchor.href;
+    let navigated = false;
+    const navigate = () => {
+      if (navigated) return;
+      navigated = true;
+      setFlag();
+      window.location.assign(destination);
+    };
 
-
-
-    gsap.killTweensOf(overlay);
-
-    overlay.classList.add("is-active");
-
-    gsap.set(overlay, { clipPath: insetClip(rect) });
-
-
-
-    gsap.to(overlay, {
-
-      clipPath: "inset(0 0 0 0 round 0)",
-
-      duration: 0.38,
-
-      ease: "power2.inOut",
-
-      onComplete: () => {
-
-        sessionStorage.setItem(EXPAND_KEY, EXPAND_VALUE);
-
-        window.location.assign(destination);
-
-      },
-
+    if (reducedMotion() || typeof gsap === "undefined") {
+      navigate();
+      return;
+    }
+    window.setTimeout(navigate, 400);
+    gsap.to("main", {
+      autoAlpha: 0,
+      y: -8,
+      duration: 0.2,
+      ease: "power2.out",
+      onComplete: navigate,
     });
-
   });
 
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    clearFlag();
+    document.documentElement.classList.remove("is-quick-arrival");
+    if (typeof gsap !== "undefined") gsap.set("main", { clearProps: "opacity,transform,visibility" });
+  });
+  return arriving;
 }
-
-

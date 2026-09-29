@@ -222,23 +222,6 @@
   opacity: 0.85;
 }
 
-/* Expand transition overlay */
-.expand-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: var(--beige);
-  pointer-events: none;
-  visibility: hidden;
-  clip-path: inset(100% 0 0 0);
-}
-
-.expand-overlay.is-active,
-html.is-expand-arrival .expand-overlay {
-  visibility: visible;
-  clip-path: inset(0 0 0 0);
-}
-
 .work-section {
   padding-top: 0;
   padding-bottom: var(--space-9);
