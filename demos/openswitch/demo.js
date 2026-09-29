@@ -57,7 +57,10 @@ function render(result) {
     `<div class="histogram__bar"><i style="height:${Math.max(5, count / max * 100)}%"></i><span>${index * 100}+</span></div>`).join("");
   document.getElementById("share").innerHTML = providerEntries(result.per_provider).map(([id, row]) =>
     `<li><span>${id}</span><span>${row.count} requests, ${row.ewma_latency_ms} ms EWMA</span><b class="state state--${row.breaker}">${row.breaker}</b></li>`).join("");
-  document.getElementById("log").innerHTML = result.traces.slice(-50).map((line) => `<p>${escapeHtml(line)}</p>`).join("") || "<p>No decisions recorded.</p>";
+  const isBreakerTrace = (line) => line.includes("breaker") || line.includes("half-open");
+  const lifecycle = result.traces.filter(isBreakerTrace).slice(-10);
+  const decisions = result.traces.filter((line) => !isBreakerTrace(line)).slice(-40);
+  document.getElementById("log").innerHTML = [...lifecycle, ...decisions].map((line) => `<p>${escapeHtml(line)}</p>`).join("") || "<p>No decisions recorded.</p>";
 }
 
 async function run() {
