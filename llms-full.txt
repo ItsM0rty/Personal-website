@@ -1,0 +1,782 @@
+# Suyash Bhattarai
+
+Portfolio page text, including home, about, and case studies.
+
+## Home
+
+Source: https://www.suyashbhattarai.com.np/
+
+AI engineer and full stack developer
+
+# LLM systems that hold up in production.
+
+I build agents, guardrails, evals, and computer vision pipelines, then sit with the people using them until the thing actually works. Most of my time goes into the part after the demo.
+
+- World 2nd in CS Official Cambridge Recognition
+
+- Top in country in CS Outstanding Cambridge Awards
+
+- A*s in CS and Maths Cambridge A Levels
+
+- Best Academic Performance Award Budhanilkantha School
+
+- CAIE AS Level Topper Budhanilkantha School
+
+- As in Econ, Business and EGP Cambridge A Levels
+
+Selected work
+
+## Agents, infrastructure, and applied ML.
+
+### Open Switch
+
+LLM gateway with circuit breakers, half-open probes, hedged requests, cost-aware routing, per-key budgets, and request traces.
+
+- Rust
+
+- Tokio
+
+- Axum
+
+- WASM
+
+### Screener
+
+Typo tolerant hybrid search with faceted filters that runs fully in the browser.
+
+- Rust
+
+- FST
+
+- WASM
+
+### Evalgate
+
+LLM evaluation runner with its own YAML check format, flakiness detection, and a pull request gate that writes a Markdown report.
+
+- Rust
+
+- CLI
+
+- YAML
+
+- WASM
+
+### Corridor FX
+
+FX exposure and hedging engine with a quantile forecast that is honest about what it cannot predict.
+
+- Python
+
+- XGBoost
+
+- FastAPI
+
+- React
+
+### Flamide
+
+Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.
+
+- Next.js
+
+- TypeScript
+
+- Supabase
+
+- DeepSeek
+
+### Entode
+
+Architect-first AI app generator that turns a short spec into a verified backend with human review.
+
+- Python
+
+- FastAPI
+
+- pytest
+
+- React Flow
+
+How I work
+
+## A green test suite is a claim, not a proof.
+
+### Run it live
+
+My worst bugs passed every mocked test. I run the real provider, unintercepted, before I call anything done.
+
+### Guardrails outside the model
+
+If a rule matters, code checks it after generation. Prompts ask nicely. Validators refuse.
+
+### Say what wasn't measured
+
+### Sit with the users
+
+I've shipped to factory floors, school offices, and police briefings. The spec is whatever they actually need on day two.
+
+Contact
+
+## Let's build something that holds up.
+
+## About
+
+Source: https://www.suyashbhattarai.com.np/about
+
+About
+
+# Hi, I'm Suyash.
+
+I'm an AI engineer and full stack developer. I build LLM systems with guardrails and evals, and I do forward deployed work: sit with the people using the system, ship what they need, and leave something the next person can maintain.
+
+Bio
+
+## What I do
+
+I build LLM systems end to end: guardrails, evaluation pipelines, and the application code around them. I test against live providers and write evals that say what they cannot claim.
+
+At Anterra Corp I fine-tuned YOLOv8m and integrated BoT-SORT tracking on Jetson Orin Nano edge hardware. I built a custom Nepali Devanagari ANPR model and demonstrated the traffic violation detection system to senior police and ministry officials.
+
+On freelance projects I work directly with the people using the software. I have sat with factory workers to refine inventory workflows and with school administrators and teachers to fix bugs in an academic management system.
+
+Honors
+
+## Recognition.
+
+World 2nd
+
+A* A*
+
+Computer Science and Mathematics A-Levels
+
+students reached through WIZ, the computer literacy nonprofit I founded
+
+- Best Academic Performance Award and AS Level Topper at Budhanilkantha School
+
+- National Economics Olympiad Finalist
+
+- Best Delegate twice at BNKS Model UN
+
+Experience
+
+## Where I've worked.
+
+### Lead Engineer, Flamide
+
+Designed and developed the core architecture of an AI-native CRM using Next.js, Supabase, and DeepSeek, with multi-tenant data isolation, real-time business-data grounding, AI guardrails, and cost- and latency-optimized model routing.
+
+### Co-Founder and Lead AI Engineer, Anterra Corp (Karma)
+
+Built an AI-powered traffic violation detection system by fine-tuning YOLOv8m and integrating BoT-SORT tracking on Jetson Orin Nano edge hardware. Developed a custom Nepali Devanagari ANPR model and demonstrated the system to senior police and ministry officials.
+
+### Founder, World of IT Zealots (WIZ)
+
+### Freelance Web Developer
+
+Built a bank credit reward system with event-driven Java/Spring Boot and Python architecture, a factory operations and inventory management system for real-time tracking and production scheduling, and an academic and administrative management system for student progress and teacher-facing workflows.
+
+### Intern, IM Swedish Development Partner
+
+Researched policy implementation gaps affecting freed Kamaiyas and Kamlaris. Revamped the Freed Kamalari Development Forum website, improved digital outreach materials, and developed a crowdfunding strategy with donation buttons, QR codes, and international donor engagement.
+
+Research and education
+
+## Background.
+
+Independent research
+
+### Testing the Platonic Representation Hypothesis at toy scale
+
+Education
+
+### Budhanilkantha School, Cambridge International A-Levels
+
+Computer Science A*, Mathematics A*, Economics A, Business A, English General Paper A.
+
+### Certifications, DeepLearning.AI and Stanford
+
+Advanced Learning Algorithms and Supervised Machine Learning: Regression and Classification.
+
+Co-authored a publication in Sambahak: Human Rights Journal.
+
+Skills
+
+## What I reach for.
+
+### AI and ML
+
+- Python, PyTorch
+
+- YOLOv8, BoT-SORT
+
+- Computer vision, ANPR
+
+- LLM evaluation pipelines
+
+- AI guardrails and grounding
+
+- Model evaluation and validation
+
+- scikit-learn, pandas, NumPy
+
+- Representation learning
+
+- Edge AI deployment
+
+- Machine learning, model fine-tuning
+
+### Backend and data
+
+- FastAPI, SQLAlchemy
+
+- Supabase, PostgreSQL
+
+- Row-level security
+
+- REST APIs
+
+- Multi-tenant architecture
+
+- Java, Spring Boot
+
+- Real-time data systems
+
+- Database design and data modeling
+
+- Authentication and RBAC
+
+- Node.js, TypeScript
+
+### Frontend and tooling
+
+- Next.js, React
+
+- HTML and CSS
+
+- Docker
+
+- CI/CD, GitHub Actions
+
+- pytest, automated testing
+
+- Linux
+
+- System design
+
+- API integration
+
+- Technical documentation
+
+- JavaScript
+
+Languages
+
+English (fluent), Nepali (native), Hindi (proficient).
+
+Contact
+
+## Want to talk through a project?
+
+## Work Alignment
+
+Source: https://www.suyashbhattarai.com.np/work-alignment
+
+# Representation alignment
+
+A toy-scale test of unsupervised alignment between two independently trained encoders, with controls and held-out retrieval checks.
+
+Role
+
+Research design, implementation, and analysis.
+
+Stack
+
+Python, PyTorch, NumPy, SciPy, scikit-learn
+
+Protocol
+
+Held-out retrieval, unrelated-encoder control, and diagnostics.
+
+Scope
+
+Synthetic scenes and independently trained toy encoders.
+
+## Start with the reference
+
+The implementation centers and normalizes each space, constructs relative representations, obtains an initial correspondence with clustered similarity structure and QAP restarts, then fits an orthogonal Procrustes map. Two refinement stages alternate nearest-neighbor matches and map updates.
+
+## Independent encoders
+
+## Checks before interpreting it
+
+### Split and control checks
+
+The train and evaluation scene indices were separated, and an unrelated-encoder control was carried through each alignment run. The write verification recorded a clean result.
+
+### Procrustes was not enough for identity retrieval
+
+### Known rotation behaved differently
+
+### The proxy was not the outcome
+
+## Evidence for correspondence at toy scale.
+
+best independent-encoder shape accuracy with relative representations
+
+mean cosine for that aligned pair
+
+shape accuracy for the corresponding unrelated control
+
+## Work Entode
+
+Source: https://www.suyashbhattarai.com.np/work-entode
+
+# Entode
+
+An architect-first AI app generator. I turn a natural-language spec into a verified, production-ready backend, with a compiler that keeps the architecture explicit and tests that check the running app.
+
+Role
+
+Solo. Design, compiler, evaluator, and UI.
+
+Stack
+
+Python, FastAPI, SQLAlchemy, pytest, React, React Flow
+
+Output
+
+Auth, relational data, row-level permissions, encrypted fields, and REST APIs
+
+Code
+
+Private. Happy to walk through the architecture.
+
+## The idea
+
+A short request can describe an app, but it cannot settle every decision about data, access, and behavior. I wanted the generated backend to have an architecture I could inspect before treating the code as finished.
+
+Entode holds that architecture in one internal representation. The ERD, business-logic and state-machine view, generative design surface, and running app all come from it. A change to the design reaches every view without a separate copy to keep in sync.
+
+## The pipeline
+
+- Propose. One AI turns the request into chunks of the app architecture. I review each step before the compiler proceeds.
+
+- Compile. The compiler turns the reviewed proposal into the backend structure and contracts.
+
+- Write. A second AI writes code with only the narrow context needed for its task.
+
+- Evaluate. A deterministic pytest evaluator checks the generated result. Neither model grades its own work.
+
+The pipeline can recover from provider failures and resume its chunked proposal. Human review stays in the loop at every step, including after recovery.
+
+## The test that changed the result
+
+The running app had to prove the wiring.
+
+### Every earlier check passed. One route was still wired wrong.
+
+A generated backend passed the other checks in the pipeline, but an end-to-end test found a real cross-route wiring defect. The individual pieces looked correct; the request path through the running app was not.
+
+That case is why the evaluator exercises behavior across routes, rather than accepting code shape or isolated route checks as proof. The model that wrote the code does not decide whether the result passes.
+
+## What it produced
+
+I also validated the pipeline against six real-world archetypes: marketplace, CRM, booking, helpdesk, LMS, and ticketing.
+
+## Work Evalgate
+
+Source: https://www.suyashbhattarai.com.np/work-evalgate
+
+# Evalgate
+
+A Rust evaluation runner and CI gate for live or recorded model outputs. Define weighted checks in YAML, classify repeated runs, and report score regressions.
+
+Role
+
+Solo project. Design, implementation, and site integration.
+
+Stack
+
+Rust, Tokio, reqwest, serde_yaml, wasm-bindgen, GitHub Actions
+
+Links
+
+Live demo, GitHub
+
+Code
+
+Open source, on GitHub.
+
+## The problem
+
+Prompt changes ship without tests. A wording tweak in the system message, a new few-shot example, or a model swap can pass code review and break production behavior. Regressions show up as customer complaints, not CI failures.
+
+Evaluation should support live endpoints during development without making CI depend on API keys. Evalgate uses the same YAML schema for OpenAI-compatible, Anthropic, echo, and recorded replay targets. The replay path keeps pull request runs deterministic.
+
+## How it is built
+
+The workspace separates pure evaluation logic, asynchronous IO, and browser bindings:
+
+- evalgate-core. Validates suites, renders templates, evaluates checks, scores weighted results, classifies repeats, and builds reports without doing IO.
+
+- evalgate-cli. Executes live or replay targets with bounded concurrency, rate limiting, retries, request timeouts, disk caching, and snapshot storage.
+
+- evalgate-wasm. Exposes deterministic evaluation, report comparison, and a flaky classification example to the browser demo.
+
+### Decisions that mattered
+
+- Repeat classification. --repeat records a case pass rate and distinguishes stable passes, stable failures, and partial flaky results.
+
+- Checks at different layers. Text, regex, JSON shape, similarity, latency, cost, snapshot, LLM judge, and embedding checks feed one weighted score.
+
+## What was hard
+
+Parts that took more than one pass.
+
+### Keeping network behavior testable
+
+### Flaky cases need their own status
+
+A case that passes some samples is different from a stable regression. The report keeps pass rate and flaky state alongside weighted check results, so comparison output does not collapse intermittent behavior into one verdict.
+
+### Snapshots are explicit
+
+Snapshot checks accept a first output only with --update-snapshots, then compare later output against that saved value.
+
+## Measured, then stated.
+
+optimized WASM binary with the size-focused release profile
+
+named check kinds in the suite schema
+
+## Work Flamide
+
+Source: https://www.suyashbhattarai.com.np/work-flamide
+
+# Flamide
+
+An AI agent that answers student enquiries for education consultancies over Instagram, Messenger, and WhatsApp, in Nepali, English, and the romanized mix people actually type. It qualifies the lead, fills the CRM, follows up when the student goes quiet, and hands off to a counselor at the moments a machine shouldn't decide.
+
+Role
+
+Lead engineer. I designed and built the core architecture.
+
+Stack
+
+Scale of the codebase
+
+Code
+
+Private. Happy to walk through it on a call.
+
+## The problem
+
+The expensive messages are the other ones. "Will my visa get approved?" "I was refused last year." "Can you lower the fee?" A bot that answers those confidently is worse than no bot, because a wrong answer about a visa file has real consequences for a student and real liability for the consultancy.
+
+So the job was never "answer everything." It was: answer what is grounded in the consultancy's own data, and escalate the rest with a reason a counselor can act on.
+
+## How it's built
+
+Every AI turn goes through the same fixed order:
+
+- Inbound guardrails. Prior refusals, complaints, finance questions, and requests for a human escalate before the model is called.
+
+- Generate. A six-layer prompt: style, guardrails, domain reference, consultancy identity, catalog, then conversation state.
+
+- Outbound guardrails. Code checks the reply for visa predictions, invented requirements, and misattributed ones.
+
+- Regenerate once. One retry with the violation named. No loops.
+
+- Escalate. If it still fails, the conversation goes to a human with the reason attached.
+
+### Decisions that mattered
+
+- Tenant isolation lives in the database. Every table carries workspace_id with a row level security policy, and composite (workspace_id, id) foreign keys make a cross-tenant reference impossible to write. The isolation suite is the most important test suite in the repo.
+
+- The model is not a privileged writer. Its writes go through narrow SQL functions. Internal columns are kept out of prompts by an allowlist, and a schema test fails the build if someone adds a column without classifying it.
+
+- The prompt is shaped for the cache. The first five layers are byte-stable per workspace and sit before a cache boundary, so the provider's prompt-cache discount applies to most of every request.
+
+- Scheduled delivery is a table, not a timer. Replies are claimed with a lease and sent exactly once, so typing delays, follow-up nudges, and multi-part messages survive a worker restart.
+
+- Channels sit behind an adapter. Nothing above ChannelAdapter knows a Meta payload exists, so every flow is testable with a mock channel before platform approval.
+
+## What broke, and what I changed
+
+The parts a demo never shows.
+
+### Green suite, silent product
+
+### Every fact true, the sentence false
+
+The guardrail now validates the whole tuple (university, board, value) against the database, and a missing row counts as a violation. That turns "requirement unknown" into an escalation instead of a guess.
+
+The engine now retries that one turn without the flag and parses the result through the same reader. It's documented as a mitigation rather than a fix, because the provider behavior is still unexplained.
+
+## Measured, then decided.
+
+more output tokens in careful mode than fast, for no grounding gain
+
+per careful reply, too slow for DMs, so fast became the default
+
+follow-up floor, enforced at the constraint, validator, and UI
+
+## Work Fx
+
+Source: https://www.suyashbhattarai.com.np/work-fx
+
+# Corridor FX
+
+Role
+
+Solo. Engine, dashboard, and models.
+
+Stack
+
+Python, FastAPI, XGBoost, Vite, React, TypeScript, recharts
+
+Corridor
+
+USD/NPR proxy from public INR per USD daily observations
+
+Demo
+
+Run the forecast and hedge demo
+
+Code
+
+Private. Walkthrough on request.
+
+## The problem
+
+Separately, margin leaks in three places: unhedged Convert Later risk net of hedge cost, idle Nostro balances sitting below the NRB deposit rate, and customer markup that could move by a basis point. The operator needs those buckets sized in one place, not spread across spreadsheets.
+
+USD/NPR on a managed peg is not a directional bet. Risk is basis points per cycle. The product value is VaR, hedging, and idle-capital opportunity cost, not pretending to call the next move.
+
+## How it's built
+
+FastAPI serves a Python engine split into four modules: data.py, exposure.py, margin.py, and forecast.py. A Vite + React + TypeScript dashboard reads the API and charts the series with recharts.
+
+- Margin out. Three buckets: unhedged Convert Later risk net of hedge cost, idle Nostro opportunity cost at the NRB deposit rate, and customer-markup yield with per-basis-point sensitivity.
+
+- API surface. /api/overview, /api/series, /api/positions, /api/exposure, and /api/margin expose the same logic the UI uses.
+
+Risk statistics are empirical from NRB USD/NPR daily rates. The sample position book is synthetic, seeded to simulate a Dashain-season surge so hedge logic is demonstrable without a live feed.
+
+## What I chose not to oversell
+
+Honesty as a design constraint.
+
+### Held-out quantile loss beats a random-walk baseline
+
+### Monthly remittance from press reports, not blocked PDFs
+
+## Measured on NRB data.
+
+## Work Openswitch
+
+Source: https://www.suyashbhattarai.com.np/work-openswitch
+
+# Open Switch
+
+A Rust LLM gateway with deterministic routing simulation, provider fallbacks, per-key budgets, and streamed OpenAI-compatible responses.
+
+Role
+
+Design and engineering
+
+Stack
+
+Rust, axum, WebAssembly, vanilla JS
+
+Repository
+
+GitHub ->
+
+## The routing decision is a moving target.
+
+A deployment can look cheap and healthy until a run of failures or a latency spike changes the tradeoff. The routing core is deterministic and separate from HTTP, so the browser demo can exercise the same decision model without contacting a provider.
+
+The axum gateway accepts OpenAI-compatible chat requests, lists configured models, emits SSE for streaming responses, and exposes plain-text request and latency metrics.
+
+## Failure has a state machine.
+
+A deployment breaker starts closed, opens after consecutive failures, and later admits a limited half-open probe set. Successful probes return it to closed. The simulation exposes that state for every deployment after a run.
+
+Latency is an exponentially weighted moving average. Unlike a fixed window, the alpha makes the reaction speed explicit. Cost-aware routing selects the cheapest healthy choice within a configured latency budget.
+
+## Protect the slow tail with a second attempt.
+
+When the first request crosses the hedge delay, the gateway starts the next deployment and uses the first completed answer. Tokio cancels the losing attempt when the request future is dropped. The simulation reports hedge count and modeled tail latency saved.
+
+Bearer keys have token ceilings per minute. Model groups and prices stay in deployment configuration, and mock, OpenAI-compatible, and Anthropic adapters share the request shape at the gateway boundary.
+
+## Small enough to inspect.
+
+tests passing in the workspace
+
+optimized browser WebAssembly binary
+
+## Work Quint
+
+Source: https://www.suyashbhattarai.com.np/work-quint
+
+# Quint
+
+A deterministic choice-and-reveal system for AI user interfaces. Most LLM products still behave like terminals: text in, text out. Quint gives developers explicit control over what a button sends to the model, what the user sees locally, and where that content appears. Provider-agnostic, and it runs without any LLM at all.
+
+Role
+
+Solo. Library, docs, and demo apps.
+
+Stack
+
+Shipped
+
+Demo
+
+Try the live demo
+
+Code
+
+GitHub, npm
+
+## The problem
+
+In a standard chat UI, a multiple-choice question has two bad options. Show the answers immediately and you spoil the question. Hide feedback at the bottom of the thread and you break spatial context.
+
+Roleplay branches have the same issue. A choice should open a local description under the button that caused it, not dump another paragraph into an endless scroll. The model input and the user-visible reveal are often different things, but most chat components treat every click as raw text.
+
+Quint is the layer between your conversation history and your UI. You already own model calls, retries, and rate limits. Quint owns how a decision becomes a structured choice and a localized reveal.
+
+## API design
+
+The surface is small on purpose. A Block holds content and an array of Choice objects. Each choice declares directionality and reveal routing explicitly.
+
+- out. Reveals pre-supplied hiddenContent only. No LLM request.
+
+- in. Sends structured inputData to your handler. Response lands in the main chat stream.
+
+- in-n-out. Both: local reveal plus model input, for tutoring hints or branching scenes.
+
+- Reveal routing. reveal: true anchors content in a collapsible container under the button. reveal: false keeps it in the global stream.
+
+### Minimal usage
+
+Core state lives in src/core. React bindings export QuintProvider, QuintRenderer, BlockRenderer, ChoiceButton, and RevealContainer, plus hooks like useAddBlock and useUpdateRevealContent for LLM-filled reveals.
+
+## What Quint is not
+
+Scope by exclusion.
+
+### Not a chat framework, not an AI SDK
+
+Quint does not manage conversation history, call models, run RAG, or route tools. It is not an agent runtime. Those stay in your app. Quint only structures how a user action becomes input and how feedback appears in the layout.
+
+That narrow scope is why it ships with zero runtime dependencies beyond React itself, and why MCQs can use directionality: 'out' with hiddenContent for deterministic feedback with no extra token spend.
+
+### Three provider integrations, not part of the package
+
+The demo/ folder has self-contained apps for Gemini, OpenAI, and Claude. Each shows how to wire onChoiceActivated to a provider and push generated text into a reveal with useUpdateRevealContent. They need API keys and are reference only, not published to npm.
+
+## Work Savings Score
+
+Source: https://www.suyashbhattarai.com.np/work-savings-score
+
+# Savings score stress test
+
+A simulation of what happens when bars optimize toward a savings score of the kind insurance-tech vendors advertise.
+
+Role
+
+Simulation, analysis, and independent audit.
+
+Stack
+
+Python, pandas, NumPy, scikit-learn, matplotlib
+
+Design
+
+Data boundary
+
+Only NYC feature distributions are real. Premiums and losses are generated.
+
+## What is simulated
+
+A hidden management-quality variable affects both loss and observable proxies such as cameras and paperwork. A carrier fits a Tweedie GLM to observable features; a monotone gradient-boosting score estimates premium reductions from operational changes. Venues take their top three recommended actions, then the carrier refits over ten periods.
+
+## What the baseline showed
+
+## What survived the audit
+
+### The full-adoption recovery was not a rebalancing effect
+
+### Correction needed an almost direct management signal
+
+### Proxy attribution held, calibration did not
+
+## Stress-tested claims, not product performance.
+
+stress runs in the complete study
+
+seeds per reported sweep
+
+proxy share of action promises across the tuning grid
+
+baseline Spearman score to true loss-cut ranking
+
+## Work Screener
+
+Source: https://www.suyashbhattarai.com.np/work-screener
+
+# Screener
+
+Role
+
+Sole author. Design, implementation, eval, and demo.
+
+Stack
+
+Rust, wasm-bindgen, postcard, arXiv metadata (CC0)
+
+Scope
+
+Links
+
+Live demo, GitHub
+
+## The problem
+
+Keyword search misses paraphrases. "Policy gradient training" will not match a paper that only says "reinforcement learning" in the abstract. Vector search fixes that, but it misses exact terms and typos. A query for "informtion retrieval" should still find information retrieval papers.
+
+## Design
+
+The pipeline splits cleanly into build time and query time.
+
+screener-core has no IO. The CLI builds indexes and runs evals. screener-wasm exposes one constructor and a query method that returns JSON.
+
+## What was hard
+
+Details the README skips.
+
+### WordPiece on full abstracts
+
+### Tokenizer parity with the reference
+
+### FST build on load
+
+Building the term FST eagerly during engine construction trapped WASM with an unreachable panic on the full corpus. Lazy initialization on first query fixed it without changing search behavior.
+
+## Measured on the eval set.
+
+gzip transfer payload for the search assets
+
+rebuilt postcard index
+
+arXiv papers (cs.CL, cs.LG, cs.IR metadata)
+
+## Try it
+
+Try the live demo or browse the source on GitHub.
+
