@@ -23,8 +23,11 @@
     <link rel="icon" href="/images/title.webp" type="image/webp" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-    <title>Sekkin | Suyash Bhattarai</title>
-    <meta name="description" content="Case study: a schema-first code generator where a deterministic compiler writes structure, an LLM fills logic, and an evaluator proves conformance." />
+    <title>Entode | Suyash Bhattarai</title>
+    <meta name="description" content="Entode turns a natural-language app spec into a verified, production-ready backend through a reviewed compiler pipeline and independent tests." />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Entode | Suyash Bhattarai" />
+    <meta property="og:description" content="An architect-first AI app generator that turns a natural-language spec into a verified, production-ready backend." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -49,12 +52,11 @@
       <main id="main">
         <header class="case-hero wrap" data-hero>
           <p class="label" data-hero-item>Case study 02, 2026</p>
-          <h1 class="case-hero__title" data-hero-item>Sekkin</h1>
+          <h1 class="case-hero__title" data-hero-item>Entode</h1>
           <p class="lede" data-hero-item>
-            A schema-first code generator. You draw entities, relationships, and
-            API contracts on a canvas. Sekkin compiles a runnable FastAPI app from
-            that schema, lets your own model fill in only the business logic, and
-            then proves the output still matches what you drew.
+            An architect-first AI app generator. I turn a natural-language spec
+            into a verified, production-ready backend, with a compiler that keeps
+            the architecture explicit and tests that check the running app.
           </p>
           <dl class="meta" data-hero-item>
             <div>
@@ -63,15 +65,15 @@
             </div>
             <div>
               <dt class="label">Stack</dt>
-              <dd>Python, FastAPI, SQLAlchemy, pytest, React, React Flow, Docker</dd>
+              <dd>Python, FastAPI, SQLAlchemy, pytest, React, React Flow</dd>
             </div>
             <div>
-              <dt class="label">Models</dt>
-              <dd>Bring your own: Anthropic, OpenAI, DeepSeek, or any OpenAI-compatible local server</dd>
+              <dt class="label">Output</dt>
+              <dd>Auth, relational data, row-level permissions, encrypted fields, and REST APIs</dd>
             </div>
             <div>
               <dt class="label">Code</dt>
-              <dd>Private, 371 commits. Demo available on request.</dd>
+              <dd>Private. Happy to walk through the architecture.</dd>
             </div>
           </dl>
         </header>
@@ -84,19 +86,16 @@
             </div>
             <div class="prose">
               <p>
-                Models are good at writing a function body in a small, well
-                described box. They are bad at keeping forty files consistent with
-                each other. Most AI code tools ask the model to do both.
+                A short request can describe an app, but it cannot settle every
+                decision about data, access, and behavior. I wanted the generated
+                backend to have an architecture I could inspect before treating
+                the code as finished.
               </p>
               <p>
-                Sekkin splits the work. The structure (models, schemas, routes,
-                migrations) comes from a deterministic compiler, so the same schema
-                always produces the same files. The model only ever sees marked
-                stubs, and it only ever writes inside them.
-              </p>
-              <p>
-                There's no chat box. The human designs the schema, the machine
-                implements it, and the evaluator is the proof.
+                Entode holds that architecture in one internal representation.
+                The ERD, business-logic and state-machine view, generative design
+                surface, and running app all come from it. A change to the design
+                reaches every view without a separate copy to keep in sync.
               </p>
             </div>
           </div>
@@ -108,26 +107,15 @@
             </div>
             <div class="prose">
               <ol class="pipeline">
-                <li><span><strong>Canvas to IR.</strong> The React Flow canvas serializes to a strict JSON intermediate representation.</span></li>
-                <li><span><strong>Validate.</strong> Broken references block generation before any code is written. Rename <code>User</code> to <code>Users</code> and it tells you which foreign key broke and suggests the fix.</span></li>
-                <li><span><strong>Compile.</strong> Deterministic output: SQLAlchemy models, Pydantic schemas, routes, and tests.</span></li>
-                <li><span><strong>Inject.</strong> The model fills only <code># AI_INJECT</code> stubs, using your key or your local model.</span></li>
-                <li><span><strong>Evaluate.</strong> AST checks confirm every declared route and field exists, then a generated pytest suite runs against the app.</span></li>
+                <li><span><strong>Propose.</strong> One AI turns the request into chunks of the app architecture. I review each step before the compiler proceeds.</span></li>
+                <li><span><strong>Compile.</strong> The compiler turns the reviewed proposal into the backend structure and contracts.</span></li>
+                <li><span><strong>Write.</strong> A second AI writes code with only the narrow context needed for its task.</span></li>
+                <li><span><strong>Evaluate.</strong> A deterministic pytest evaluator checks the generated result. Neither model grades its own work.</span></li>
               </ol>
               <p>
-                With no model configured, the whole pipeline still runs. Route
-                bodies stay as <code>501</code> stubs and the evaluator confirms the
-                structure. The AI is an optional layer, not a dependency.
-              </p>
-
-              <h3>Cutting prompt tokens</h3>
-              <p>
-                The locked schema context goes into every prompt, so its size is
-                a direct cost. I added an option to serialize it as TOON instead of
-                JSON and measured about a 25% token reduction on Sekkin's own
-                payloads with the <code>o200k_base</code> tokenizer. The encoding is
-                deterministic, and the generated app's own API contracts stay
-                plain JSON.
+                The pipeline can recover from provider failures and resume its
+                chunked proposal. Human review stays in the loop at every step,
+                including after recovery.
               </p>
             </div>
           </div>
@@ -138,30 +126,24 @@
             <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
               <div class="chapter__side">
                 <p class="label">03</p>
-                <h2 class="h3">The finding I'm proudest of</h2>
-                <p class="muted">Because it was my own bug.</p>
+                <h2 class="h3">The test that changed the result</h2>
+                <p class="muted">The running app had to prove the wiring.</p>
               </div>
               <div class="prose" style="max-width: 44rem">
                 <div class="incident">
-                  <span class="label">Graduation exam, live provider, nothing intercepted</span>
-                  <h3>A feature that passed 16 of 16 and could not be reached</h3>
+                  <span class="label">End-to-end evaluation</span>
+                  <h3>Every earlier check passed. One route was still wired wrong.</h3>
                   <p>
-                    Large schema requests were supposed to hit the output limit and
-                    get offered a "build it in steps" plan instead. The test suite
-                    was green. In the real browser, the user got an error and
-                    nothing to click.
+                    A generated backend passed the other checks in the pipeline,
+                    but an end-to-end test found a real cross-route wiring defect.
+                    The individual pieces looked correct; the request path through
+                    the running app was not.
                   </p>
                   <p>
-                    The UI streams first, and the streaming endpoint kept only the
-                    error message from the exception, dropping the plan at the
-                    transport boundary. The test harness aborted the stream route to
-                    exercise the fallback, which was the one thing that made the
-                    offer reachable. The test was right about the path it took and
-                    wrong about the path the product takes.
-                  </p>
-                  <p>
-                    Since then, anything I call done has been run once through the
-                    shipped path, live, with nothing mocked or intercepted.
+                    That case is why the evaluator exercises behavior across
+                    routes, rather than accepting code shape or isolated route
+                    checks as proof. The model that wrote the code does not decide
+                    whether the result passes.
                   </p>
                 </div>
               </div>
@@ -173,14 +155,20 @@
           <div class="chapter" data-reveal>
             <div class="chapter__side">
               <p class="label">04</p>
-              <h2 class="h3">Scope and limits</h2>
+              <h2 class="h3">What it produced</h2>
             </div>
             <div class="prose">
-              <ul>
-                <li>Single machine, one <code>docker-compose up</code>. No auth, no cloud sync, no team features in v1.</li>
-                <li>One target: FastAPI with SQLAlchemy, Postgres in production and SQLite for the evaluator's test run.</li>
-                <li>Provider keys stay in a local SQLite database and are never logged or returned by any endpoint.</li>
-              </ul>
+              <p>
+                From the sentence "build a basic social network," Entode generated
+                a backend with auth, a relational data model, RBAC with row-level
+                permissions, encrypted fields, and a REST API. It passed 100% of
+                a 250+ test compiler and contract suite on the first attempt, at
+                $0.0146 in inference cost.
+              </p>
+              <p>
+                I also validated the pipeline against six real-world archetypes:
+                marketplace, CRM, booking, helpdesk, LMS, and ticketing.
+              </p>
             </div>
           </div>
         </section>
