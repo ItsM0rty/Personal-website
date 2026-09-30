@@ -353,7 +353,12 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   margin-top: var(--space-8);
-  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 600px) {
+  .honors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .honors li {
@@ -362,14 +367,10 @@ main {
   justify-content: flex-start;
   gap: var(--space-3);
   padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
 }
 
 @media (min-width: 600px) {
-  .honors {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .honors li:nth-child(odd) {
     padding-right: var(--space-5);
   }
@@ -382,40 +383,52 @@ main {
 
 @media (min-width: 1000px) {
   .honors {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
-  .honors::after {
-    content: "";
-    border-bottom: 1px solid var(--line);
+  .honors li {
+    grid-column: span 3;
   }
 
-  .honors li,
+  .honors li:nth-child(5) {
+    grid-column: 2 / span 3;
+  }
+
+  .honors li:nth-child(6) {
+    grid-column: 5 / span 3;
+  }
+
+  .honors li:nth-child(7) {
+    grid-column: 8 / span 3;
+  }
+
   .honors li:nth-child(odd),
   .honors li:nth-child(even) {
     padding-inline: var(--space-5);
     border-left: 1px solid var(--line);
   }
 
-  .honors li:nth-child(4n + 1) {
-    padding-left: 0;
+  .honors li:nth-child(1),
+  .honors li:nth-child(5) {
     border-left: 0;
+    padding-left: 0;
   }
 }
 
 .honors__value {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1;
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.1;
   letter-spacing: -0.01em;
+  min-height: 2.2em;
+  text-wrap: balance;
 }
 
 .honors__label {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  letter-spacing: 0.02em;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
   color: var(--ink-soft);
-  max-width: 16rem;
 }
 
 .more-link {
