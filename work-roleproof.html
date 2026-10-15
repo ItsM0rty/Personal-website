@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
+          }
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
+      })();
+    </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <title>RoleProof | Suyash Bhattarai</title>
+    <meta name="description" content="Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo." />
+        <link rel="canonical" href="https://www.suyashbhattarai.com.np/work-roleproof" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="RoleProof | Suyash Bhattarai" />
+    <meta property="og:description" content="Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo." />
+    <meta property="og:url" content="https://www.suyashbhattarai.com.np/work-roleproof" />
+    <meta property="og:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Suyash Bhattarai, AI engineer and full stack developer" />
+    <meta property="og:site_name" content="Suyash Bhattarai" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RoleProof | Suyash Bhattarai" />
+    <meta name="twitter:description" content="Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo." />
+    <meta name="twitter:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <meta name="theme-color" content="#eceae5" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://www.suyashbhattarai.com.np/work-roleproof#article","headline":"RoleProof","description":"Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo.","url":"https://www.suyashbhattarai.com.np/work-roleproof","image":"https://www.suyashbhattarai.com.np/images/og.png","author":{"@id":"https://www.suyashbhattarai.com.np/#person"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.suyashbhattarai.com.np/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.suyashbhattarai.com.np/work"},{"@type":"ListItem","position":3,"name":"RoleProof","item":"https://www.suyashbhattarai.com.np/work-roleproof"}]},{"@type":"Person","@id":"https://www.suyashbhattarai.com.np/#person","name":"Suyash Bhattarai","jobTitle":["AI engineer","Full stack developer"],"url":"https://www.suyashbhattarai.com.np/","image":"https://www.suyashbhattarai.com.np/images/portrait.jpg","email":"mailto:hey@suyashbhattarai.com.np","sameAs":["https://github.com/ItsM0rty"],"knowsAbout":["LLM systems","model evaluation","computer vision","Rust","full stack development"]}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Independent prototype, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>RoleProof</h1>
+          <p class="lede" data-hero-item>A job recommendation should explain itself. RoleProof compares the listing with your preferences and shows the evidence, the mismatch, and the questions still open.</p>
+          <dl class="meta" data-hero-item>
+            <div><dt class="label">Role</dt><dd>Solo project. Application, decision policy, evaluations, and interface.</dd></div>
+            <div><dt class="label">Stack</dt><dd>TypeScript, React, Instructor JS, Zod, Express, Vitest, Promptfoo</dd></div>
+            <div><dt class="label">Links</dt><dd><a href="demo-roleproof.html">Live demo</a>, <a href="https://github.com/ItsM0rty/roleproof">GitHub</a></dd></div>
+            <div><dt class="label">Code</dt><dd>MIT. Built on the open-source Instructor JS extraction library.</dd></div>
+          </dl>
+        </header>
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">01</p><h2 class="h3">The problem</h2></div>
+            <div class="prose"><p>A role can mention the right technologies and still leave the practical details unclear. Remote can mean a particular country. A compensation figure can include equity. A missing technology mention can be mistaken for a mismatch.</p><p>I built a small explanation layer for these distinctions. Each preference gets one of three answers: supported, contradicted, or unknown. An unknown keeps the role in view and gives the applicant a concrete question to resolve.</p></div>
+          </div>
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">02</p><h2 class="h3">The implementation</h2></div>
+            <div class="prose"><ol class="pipeline">
+              <li><span><strong>Extract the listing.</strong> Instructor JS and Zod produce structured location clauses, pay ranges, technologies, and exact quotations. The extraction prompt does not receive the candidate preferences.</span></li>
+              <li><span><strong>Check the evidence.</strong> Code checks that each quotation occurs in the source. A missing quotation withholds the conclusion for that dimension.</span></li>
+              <li><span><strong>Compare preferences.</strong> A deterministic policy evaluates the stated hiring scope, comparable base cash, and technology mentions. Conflicting or incomplete evidence stays unknown.</span></li>
+              <li><span><strong>Make it reviewable.</strong> Source references highlight the original passage. Changing preferences recomputes the explanation. JSON export includes the source, facts, and decision.</span></li>
+            </ol><p>The live browser demo uses the same decision code with clearly labelled saved facts. Four fictional examples and a dated public listing excerpt can be explored without an account or API key.</p></div>
+          </div>
+        </section>
+        <section class="section is-dark"><div class="wrap"><div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+          <div class="chapter__side"><p class="label">03</p><h2 class="h3">Decisions that mattered</h2></div>
+          <div class="prose" style="max-width: 44rem">
+            <div class="incident"><span class="label">Uncertainty</span><h3>A missing fact is not a rejection.</h3><p>Location ambiguity, a salary range that crosses the desired minimum, and an absent technology mention each remain visible as unknown. The policy does not invent an answer to fill the gap.</p></div>
+            <div class="incident"><span class="label">Reuse</span><h3>Extract once, compare again.</h3><p>Separating extraction from preferences lets a listing be compared with several profiles without asking the model to reinterpret it on every change. Instructor JS supplies the structured extraction infrastructure; the application policy and interface are project code.</p></div>
+            <div class="incident"><span class="label">Evidence</span><h3>A quotation is a review aid.</h3><p>An exact quote check establishes that text exists, not that a model understood it correctly. The passage stays available for inspection, and the evaluation harness keeps extraction quality separate from policy correctness.</p></div>
+          </div>
+        </div></div></section>
+        <section class="wrap"><div class="chapter" data-reveal>
+          <div class="chapter__side"><p class="label">04</p><h2 class="h3">Verification and scope</h2></div>
+          <div class="prose"><p>35 regression and integration tests pass, including the real Instructor package against a local fake HTTP provider. All 23 author-labelled synthetic policy scenarios pass in the native runner and Promptfoo replay. GitHub CI verifies the project on Windows and Ubuntu with Node 22 and 24.</p><p>These results measure specified policy and integration behavior. No live model accuracy or improvement over a commercial matching system has been measured. The repository includes a runnable live comparison against a single-prompt baseline, with correctness, false exclusions, unsupported confirmations, token use, and latency reported separately.</p><p>The prototype covers hiring-location wording, base cash, and technology mentions. It does not determine legal work eligibility or assess experience, seniority, time-zone overlap, or the full job requirements.</p><p>Inspired by remote job matching. An independent project, with no Matcha affiliation or private integration.</p><p><a class="btn" href="demo-roleproof.html">Try the live demo</a></p></div>
+        </div></section>
+        <a href="work-evalgate.html" class="next-case wrap"><span class="label">Next case study</span><span class="next-case__title">Evalgate <span class="arrow">&rarr;</span></span></a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>
