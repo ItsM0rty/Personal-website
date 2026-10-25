@@ -14,17 +14,17 @@
 
 - [Quint](https://www.suyashbhattarai.com.np/work-quint): Deterministic choice-and-reveal library for React interfaces.
 
-- [Entode](https://www.suyashbhattarai.com.np/work-entode): Compiler pipeline that turns an application spec into a verified backend.
+- [Entode](https://www.suyashbhattarai.com.np/work-entode): Backend generator with a schema compiler, scoped model edits and a bounded repair loop driven by executable checks.
 
 ## Case studies
 
 - [Representation Alignment](https://www.suyashbhattarai.com.np/work-alignment): A case study on embedding alignment between independently trained toy encoders, including the reference reproduction and unsupervised experiments.
 
-- [Entode](https://www.suyashbhattarai.com.np/work-entode): Entode translates a natural-language application spec into a backend through a reviewed compiler pipeline, verification steps, and independent tests.
+- [Entode](https://www.suyashbhattarai.com.np/work-entode): Entode combines a JSON schema compiler, scoped model edits and pytest contract tests to generate backends through a bounded repair loop.
 
 - [Evalgate](https://www.suyashbhattarai.com.np/work-evalgate): Evalgate is a Rust evaluation runner for recorded and live model outputs, with weighted checks, regression reports, and a browser demo.
 
-- [Flamide](https://www.suyashbhattarai.com.np/work-flamide): A case study of a multilingual AI agent for education consultancies, with code-enforced guardrails and database-level tenant isolation.
+- [Flamide](https://www.suyashbhattarai.com.np/work-flamide): Flamide is an AI enquiry and CRM system in beta with select consultancies, with validated record updates, reply checks and counselor handoff.
 
 - [Corridor FX](https://www.suyashbhattarai.com.np/work-fx): Corridor FX is an operational dashboard that estimates currency exposure and forecasts risk bands for a remittance workflow on a managed peg.
 

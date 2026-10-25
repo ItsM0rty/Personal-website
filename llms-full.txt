@@ -76,7 +76,7 @@ FX exposure and hedging engine with a quantile forecast that is honest about wha
 
 ### Flamide
 
-Multilingual AI agent that answers student enquiries, fills a CRM, and hands off decisions to a counselor.
+AI enquiry and CRM system in beta; collects student details, updates records and follows up with counselor handoff.
 
 - Next.js
 
@@ -88,7 +88,7 @@ Multilingual AI agent that answers student enquiries, fills a CRM, and hands off
 
 ### Entode
 
-Architect-first AI app generator that turns a short spec into a verified backend with human review.
+Backend generator with a schema compiler, scoped model edits and a bounded repair loop driven by executable checks.
 
 - Python
 
@@ -162,9 +162,9 @@ Experience
 
 ## Where I've worked.
 
-### Lead Engineer, Flamide
+### Co-founder and Co-founder and Lead Engineer, Flamide
 
-Designed and developed the core architecture of an AI-native CRM using Next.js, Supabase, and DeepSeek, with multi-tenant data isolation, real-time business-data grounding, AI guardrails, and cost- and latency-optimized model routing.
+Built an AI enquiry and CRM system as the sole engineer, now in beta with select consultancies. The agent collects student details, updates lead records and follows up on conversations, with reply checks and counselor handoff. Built with Next.js, Supabase and DeepSeek.
 
 ### Co-Founder and Lead AI Engineer, Anterra Corp (Karma)
 
@@ -332,13 +332,15 @@ shape accuracy for the corresponding unrelated control
 
 Source: https://www.suyashbhattarai.com.np/work-entode
 
+Case study 02, 2026
+
 # Entode
 
-An architect-first AI app generator. I turn a natural-language spec into a verified, production-ready backend, with a compiler that keeps the architecture explicit and tests that check the running app.
+I built a backend generator around a reviewed schema, a deterministic compiler and a bounded agent loop. The compiler builds the app structure, models fill the business logic, and executable checks drive the repairs.
 
 Role
 
-Solo. Design, compiler, evaluator, and UI.
+Solo builder. Architecture, compiler, agent harness, evaluator and UI.
 
 Stack
 
@@ -352,27 +354,49 @@ Code
 
 Private. Happy to walk through the architecture.
 
+01
+
 ## The idea
 
 A short request can describe an app, but it cannot settle every decision about data, access, and behavior. I wanted the generated backend to have an architecture I could inspect before treating the code as finished.
 
 Entode holds that architecture in one internal representation. The ERD, business-logic and state-machine view, generative design surface, and running app all come from it. A change to the design reaches every view without a separate copy to keep in sync.
 
+02
+
 ## The pipeline
 
-- Propose. One AI turns the request into chunks of the app architecture. I review each step before the compiler proceeds.
+- Propose. A schema model turns the request into architecture changes. I review the proposal before accepting it into the JSON schema.
 
-- Compile. The compiler turns the reviewed proposal into the backend structure and contracts.
+- Compile. A deterministic compiler emits FastAPI routes, SQLAlchemy models, request and response schemas, and the declared permissions.
 
-- Write. A second AI writes code with only the narrow context needed for its task.
+- Write. A separate code model fills marked business-logic stubs. Larger jobs are split into function chunks, and only the permitted functions are merged back.
 
-- Evaluate. A deterministic pytest evaluator checks the generated result. Neither model grades its own work.
+- Evaluate. Static checks inspect the code and protect compiler-owned parts. Generated pytest cases exercise the app through HTTP requests, including behavior across routes.
 
-The pipeline can recover from provider failures and resume its chunked proposal. Human review stays in the loop at every step, including after recovery.
+- Repair. The evaluator recursively feeds failures back into generation. Each correction starts from the clean compiler baseline and the latest failure report.
+
+The schema proposal and code-generation stages have separate responsibilities. A failed code attempt cannot silently redefine the architecture it was asked to implement.
+
+03
+
+## Where the model can write
+
+The compiler owns the permission dependencies, state-transition helpers and encryption runtime. The code model implements the business logic around them. Integrity checks compare these protected parts against saved compiler output, so a rewritten permission check cannot pass just because the rest of the route still works.
+
+### Fresh context for each correction
+
+I restore the compiler stub before every correction. The next attempt receives the schema, the clean stub and a concrete report of what failed. Failed code and a growing chat history do not become the next attempt's starting point.
+
+The loop stops when the checks pass, failures repeat, or the attempt budget runs out. It also stops when the failure belongs to the schema or compiler; rewriting business logic cannot fix those problems. The remaining failure is surfaced for a decision.
+
+04
 
 ## The test that changed the result
 
 The running app had to prove the wiring.
+
+End-to-end evaluation
 
 ### Every earlier check passed. One route was still wired wrong.
 
@@ -380,9 +404,15 @@ A generated backend passed the other checks in the pipeline, but an end-to-end t
 
 That case is why the evaluator exercises behavior across routes, rather than accepting code shape or isolated route checks as proof. The model that wrote the code does not decide whether the result passes.
 
+05
+
 ## What it produced
 
-I also validated the pipeline against six real-world archetypes: marketplace, CRM, booking, helpdesk, LMS, and ticketing.
+From the sentence "build a basic social network," Entode generated a backend with auth, a relational data model, RBAC with row-level permissions, encrypted fields, and a REST API. The useful part was being able to inspect the schema and check the generated behavior against it.
+
+I also exercised the pipeline against six application archetypes: marketplace, CRM, booking, helpdesk, LMS, and ticketing.
+
+Passing the configured checks tells me how the app behaved on those cases. Entode is a local development tool; a generated app still needs deployment review and tests for requirements its schema does not describe.
 
 ## Work Evalgate
 
@@ -454,73 +484,119 @@ named check kinds in the suite schema
 
 Source: https://www.suyashbhattarai.com.np/work-flamide
 
+Case study 01, 2026
+
 # Flamide
 
-An AI agent that answers student enquiries for education consultancies over Instagram, Messenger, and WhatsApp, in Nepali, English, and the romanized mix people actually type. It qualifies the lead, fills the CRM, follows up when the student goes quiet, and hands off to a counselor at the moments a machine shouldn't decide.
+I co-founded Flamide and built the product, now in beta with select education consultancies. Its AI agent handles Instagram, Messenger and WhatsApp enquiries in Nepali, English and Romanized Nepali. It collects student details, updates the CRM and follows up on conversations. Counselors take over when a case needs their judgment.
 
 Role
 
-Lead engineer. I designed and built the core architecture.
+Co-founder and sole engineer. Product, agent workflow, backend and UI.
 
 Stack
 
-Scale of the codebase
+Next.js 16, TypeScript, Supabase (Postgres, RLS, Realtime), DeepSeek, Vitest, Playwright
+
+Status
+
+Beta deployment with select consultancies.
 
 Code
 
 Private. Happy to walk through it on a call.
 
+01
+
 ## The problem
 
-The expensive messages are the other ones. "Will my visa get approved?" "I was refused last year." "Can you lower the fee?" A bot that answers those confidently is worse than no bot, because a wrong answer about a visa file has real consequences for a student and real liability for the consultancy.
+Consultancies in Nepal run on DMs. Most enquiries come in after hours, in mixed script, and ask the same handful of questions about courses, fees and intakes. The answers need to come from the consultancy's current catalog.
 
-So the job was never "answer everything." It was: answer what is grounded in the consultancy's own data, and escalate the rest with a reason a counselor can act on.
+The expensive messages are the other ones. "Will my visa get approved?" "I was refused last year." "Can you lower the fee?" A confident but unsupported answer can change a student's plans. The counselor needs to see these cases with enough context to take over.
+
+I built the workflow around the consultancy's own data and explicit handoff rules. The counselor gets the conversation and the reason it was escalated.
+
+02
 
 ## How it's built
 
-Every AI turn goes through the same fixed order:
+The agent does more than draft replies. Student details from a conversation are extracted into a validated set of CRM fields. Follow-ups use the conversation history and pass through reply checks before they enter the delivery queue. Sensitive cases carry a reason and summary into the counselor handoff.
 
-- Inbound guardrails. Prior refusals, complaints, finance questions, and requests for a human escalate before the model is called.
+The main reply path works like this:
+
+- Inbound checks. Prior refusals, complaints, finance questions and requests for a human can trigger escalation before reply generation.
 
 - Generate. A six-layer prompt: style, guardrails, domain reference, consultancy identity, catalog, then conversation state.
 
-- Outbound guardrails. Code checks the reply for visa predictions, invented requirements, and misattributed ones.
+- Outbound checks. Code checks for visa predictions, unsupported numerical requirements and claims attributed to the wrong university.
 
-- Regenerate once. One retry with the violation named. No loops.
+- Repair. A guardrail failure gets one regeneration with the violation named. Script and provider-format failures have their own bounded recovery paths.
 
 - Escalate. If it still fails, the conversation goes to a human with the reason attached.
 
 ### Decisions that mattered
 
-- Tenant isolation lives in the database. Every table carries workspace_id with a row level security policy, and composite (workspace_id, id) foreign keys make a cross-tenant reference impossible to write. The isolation suite is the most important test suite in the repo.
+-  Workspace isolation is enforced in the database. Workspace-scoped records use row-level security policies and composite (workspace_id, id) foreign keys. The database rejects references across workspaces instead of leaving that check to each screen.
 
-- The model is not a privileged writer. Its writes go through narrow SQL functions. Internal columns are kept out of prompts by an allowlist, and a schema test fails the build if someone adds a column without classifying it.
+-  CRM updates have a narrow write path. Extracted fields are validated with Zod and passed to scoped SQL functions with the workspace and source message attached. Internal university fields stay out of prompts through an explicit column allowlist, checked against the schema.
 
-- The prompt is shaped for the cache. The first five layers are byte-stable per workspace and sit before a cache boundary, so the provider's prompt-cache discount applies to most of every request.
+-  The prompt keeps a stable prefix. Workspace instructions, domain reference and catalog context precede the changing conversation state. This gives the provider a reusable prefix without assuming that every request will hit its cache.
 
-- Scheduled delivery is a table, not a timer. Replies are claimed with a lease and sent exactly once, so typing delays, follow-up nudges, and multi-part messages survive a worker restart.
+-  Replies wait in a durable queue. Workers claim jobs with a lease and record completion transactionally. Pending replies can be recovered after a restart; external delivery still needs to account for a send succeeding before its completion is recorded.
 
-- Channels sit behind an adapter. Nothing above ChannelAdapter knows a Meta payload exists, so every flow is testable with a mock channel before platform approval.
+-  Transport sits behind a channel adapter. Instagram, Messenger and WhatsApp sit behind ChannelAdapter. The core workflow stays separate from each platform's payloads and can be exercised through a mock adapter during development.
+
+### Staff can query the pipeline too
+
+A separate assistant turns staff questions into validated filters and groupings. Application code applies them to the caller's records and calculates the counts. The model helps interpret the question; it does not invent the result or run arbitrary SQL.
+
+03
 
 ## What broke, and what I changed
 
 The parts a demo never shows.
 
+Incident
+
 ### Green suite, silent product
+
+The first live call to the model returned nothing. Every reply, every time. In the "careful" effort mode the model spent the whole token budget reasoning and got cut off before writing a character, and the engine quietly logged that as "silent." The mock-provider tests had missed the failure because their responses had no token ceiling.
+
+I sized the ceilings per effort level from measured completions, added a guard that fails loudly on an empty completion, and started treating live runs as a separate gate.
+
+Incident
 
 ### Every fact true, the sentence false
 
+A reply told a student that CQUniversity needs 75% for CBSE students. CQUniversity had no CBSE requirement on file, and 75% belonged to Coventry, in another country. Each piece was real, so an existence check could never catch it.
+
 The guardrail now validates the whole tuple (university, board, value) against the database, and a missing row counts as a violation. That turns "requirement unknown" into an escalation instead of a guess.
+
+Incident
+
+### The provider answered with 86 spaces
+
+Certain JSON-mode requests came back as pure whitespace with a normal stop reason, deterministically, at temperature 0. I isolated the trigger to the JSON-mode flag with five variations of the captured payload.
 
 The engine now retries that one turn without the flag and parses the result through the same reader. It's documented as a mitigation rather than a fix, because the provider behavior is still unexplained.
 
-## Measured, then decided.
+04
 
-more output tokens in careful mode than fast, for no grounding gain
+## How I check behavior
 
-per careful reply, too slow for DMs, so fast became the default
+Mock-provider tests cover the application's decisions. Database tests check isolation and constrained writes. Browser tests exercise the counselor workflow. These answer different questions, so a green unit suite does not stand in for all of them.
 
-follow-up floor, enforced at the constraint, validator, and UI
+I also use scripted live-model evaluations to inspect replies and guardrail behavior in English, Nepali and Romanized Nepali. They produce conversation reports for review; they are not an automatic guarantee that a model change is safe to ship.
+
+05
+
+## Limits, stated plainly
+
+- The product is in beta with select consultancies; the case study describes that stage of deployment.
+
+- The reply checks cover specific failure patterns. They do not catch every unsupported claim, especially requirements stated only in prose.
+
+- The live evaluation runner records outputs for inspection. A passing automated canary for the current model is a separate piece of work.
 
 ## Work Fx
 

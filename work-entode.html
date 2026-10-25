@@ -24,15 +24,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
     <title>Entode | Suyash Bhattarai</title>
-    <meta name="description" content="Entode translates a natural-language application spec into a backend through a reviewed compiler pipeline, verification steps, and independent tests." />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Entode | Suyash Bhattarai" />
-    <meta property="og:description" content="An architect-first AI app generator that turns a natural-language spec into a verified, production-ready backend." />
-        <link rel="canonical" href="https://www.suyashbhattarai.com.np/work-entode" />
+    <meta name="description" content="Entode combines a JSON schema compiler, scoped model edits and pytest contract tests to generate backends through a bounded repair loop." />
+    <link rel="canonical" href="https://www.suyashbhattarai.com.np/work-entode" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Entode | Suyash Bhattarai" />
-    <meta property="og:description" content="Entode translates a natural-language application spec into a backend through a reviewed compiler pipeline, verification steps, and independent tests." />
+    <meta property="og:description" content="Entode combines a JSON schema compiler, scoped model edits and pytest contract tests to generate backends through a bounded repair loop." />
     <meta property="og:url" content="https://www.suyashbhattarai.com.np/work-entode" />
     <meta property="og:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
     <meta property="og:image:width" content="1200" />
@@ -42,12 +39,12 @@
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Entode | Suyash Bhattarai" />
-    <meta name="twitter:description" content="Entode translates a natural-language application spec into a backend through a reviewed compiler pipeline, verification steps, and independent tests." />
+    <meta name="twitter:description" content="Entode combines a JSON schema compiler, scoped model edits and pytest contract tests to generate backends through a bounded repair loop." />
     <meta name="twitter:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
     <meta name="theme-color" content="#eceae5" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://www.suyashbhattarai.com.np/work-entode#article","headline":"Entode","description":"Entode translates a natural-language application spec into a backend through a reviewed compiler pipeline, verification steps, and independent tests.","url":"https://www.suyashbhattarai.com.np/work-entode","image":"https://www.suyashbhattarai.com.np/images/og.png","author":{"@id":"https://www.suyashbhattarai.com.np/#person"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.suyashbhattarai.com.np/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.suyashbhattarai.com.np/work"},{"@type":"ListItem","position":3,"name":"Entode","item":"https://www.suyashbhattarai.com.np/work-entode"}]},{"@type":"Person","@id":"https://www.suyashbhattarai.com.np/#person","name":"Suyash Bhattarai","jobTitle":["AI engineer","Full stack developer"],"url":"https://www.suyashbhattarai.com.np/","image":"https://www.suyashbhattarai.com.np/images/portrait.jpg","email":"mailto:hey@suyashbhattarai.com.np","sameAs":["https://github.com/ItsM0rty"],"knowsAbout":["LLM systems","model evaluation","computer vision","Rust","full stack development"]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://www.suyashbhattarai.com.np/work-entode#article","headline":"Entode","description":"Entode combines a JSON schema compiler, scoped model edits and pytest contract tests to generate backends through a bounded repair loop.","url":"https://www.suyashbhattarai.com.np/work-entode","image":"https://www.suyashbhattarai.com.np/images/og.png","author":{"@id":"https://www.suyashbhattarai.com.np/#person"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.suyashbhattarai.com.np/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.suyashbhattarai.com.np/work"},{"@type":"ListItem","position":3,"name":"Entode","item":"https://www.suyashbhattarai.com.np/work-entode"}]},{"@type":"Person","@id":"https://www.suyashbhattarai.com.np/#person","name":"Suyash Bhattarai","jobTitle":["AI engineer","Full stack developer"],"url":"https://www.suyashbhattarai.com.np/","image":"https://www.suyashbhattarai.com.np/images/portrait.jpg","email":"mailto:hey@suyashbhattarai.com.np","sameAs":["https://github.com/ItsM0rty"],"knowsAbout":["LLM systems","model evaluation","computer vision","Rust","full stack development"]}]}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -74,14 +71,15 @@
           <p class="label" data-hero-item>Case study 02, 2026</p>
           <h1 class="case-hero__title" data-hero-item>Entode</h1>
           <p class="lede" data-hero-item>
-            An architect-first AI app generator. I turn a natural-language spec
-            into a verified, production-ready backend, with a compiler that keeps
-            the architecture explicit and tests that check the running app.
+            I built a backend generator around a reviewed schema, a deterministic
+            compiler and a bounded agent loop. The compiler builds the app
+            structure, models fill the business logic, and executable checks
+            drive the repairs.
           </p>
           <dl class="meta" data-hero-item>
             <div>
               <dt class="label">Role</dt>
-              <dd>Solo. Design, compiler, evaluator, and UI.</dd>
+              <dd>Solo builder. Architecture, compiler, agent harness, evaluator and UI.</dd>
             </div>
             <div>
               <dt class="label">Stack</dt>
@@ -127,15 +125,46 @@
             </div>
             <div class="prose">
               <ol class="pipeline">
-                <li><span><strong>Propose.</strong> One AI turns the request into chunks of the app architecture. I review each step before the compiler proceeds.</span></li>
-                <li><span><strong>Compile.</strong> The compiler turns the reviewed proposal into the backend structure and contracts.</span></li>
-                <li><span><strong>Write.</strong> A second AI writes code with only the narrow context needed for its task.</span></li>
-                <li><span><strong>Evaluate.</strong> A deterministic pytest evaluator checks the generated result. Neither model grades its own work.</span></li>
+                <li><span><strong>Propose.</strong> A schema model turns the request into architecture changes. I review the proposal before accepting it into the JSON schema.</span></li>
+                <li><span><strong>Compile.</strong> A deterministic compiler emits FastAPI routes, SQLAlchemy models, request and response schemas, and the declared permissions.</span></li>
+                <li><span><strong>Write.</strong> A separate code model fills marked business-logic stubs. Larger jobs are split into function chunks, and only the permitted functions are merged back.</span></li>
+                <li><span><strong>Evaluate.</strong> Static checks inspect the code and protect compiler-owned parts. Generated pytest cases exercise the app through HTTP requests, including behavior across routes.</span></li>
+                <li><span><strong>Repair.</strong> The evaluator recursively feeds failures back into generation. Each correction starts from the clean compiler baseline and the latest failure report.</span></li>
               </ol>
               <p>
-                The pipeline can recover from provider failures and resume its
-                chunked proposal. Human review stays in the loop at every step,
-                including after recovery.
+                The schema proposal and code-generation stages have separate
+                responsibilities. A failed code attempt cannot silently redefine
+                the architecture it was asked to implement.
+              </p>
+            </div>
+          </div>
+
+          <div class="chapter" data-reveal>
+            <div class="chapter__side">
+              <p class="label">03</p>
+              <h2 class="h3">Where the model can write</h2>
+            </div>
+            <div class="prose">
+              <p>
+                The compiler owns the permission dependencies, state-transition
+                helpers and encryption runtime. The code model implements the
+                business logic around them. Integrity checks compare these
+                protected parts against saved compiler output, so a rewritten
+                permission check cannot pass just because the rest of the route
+                still works.
+              </p>
+              <h3>Fresh context for each correction</h3>
+              <p>
+                I restore the compiler stub before every correction. The next
+                attempt receives the schema, the clean stub and a concrete report
+                of what failed. Failed code and a growing chat history do not
+                become the next attempt's starting point.
+              </p>
+              <p>
+                The loop stops when the checks pass, failures repeat, or the
+                attempt budget runs out. It also stops when the failure belongs
+                to the schema or compiler; rewriting business logic cannot fix
+                those problems. The remaining failure is surfaced for a decision.
               </p>
             </div>
           </div>
@@ -145,7 +174,7 @@
           <div class="wrap">
             <div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
               <div class="chapter__side">
-                <p class="label">03</p>
+                <p class="label">04</p>
                 <h2 class="h3">The test that changed the result</h2>
                 <p class="muted">The running app had to prove the wiring.</p>
               </div>
@@ -174,20 +203,26 @@
         <section class="wrap">
           <div class="chapter" data-reveal>
             <div class="chapter__side">
-              <p class="label">04</p>
+              <p class="label">05</p>
               <h2 class="h3">What it produced</h2>
             </div>
             <div class="prose">
               <p>
                 From the sentence "build a basic social network," Entode generated
                 a backend with auth, a relational data model, RBAC with row-level
-                permissions, encrypted fields, and a REST API. It passed 100% of
-                a 250+ test compiler and contract suite on the first attempt, at
-                $0.0146 in inference cost.
+                permissions, encrypted fields, and a REST API. The useful part
+                was being able to inspect the schema and check the generated
+                behavior against it.
               </p>
               <p>
-                I also validated the pipeline against six real-world archetypes:
+                I also exercised the pipeline against six application archetypes:
                 marketplace, CRM, booking, helpdesk, LMS, and ticketing.
+              </p>
+              <p>
+                Passing the configured checks tells me how the app behaved on
+                those cases. Entode is a local development tool; a generated app
+                still needs deployment review and tests for requirements its
+                schema does not describe.
               </p>
             </div>
           </div>
