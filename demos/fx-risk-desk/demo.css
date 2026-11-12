@@ -1,8 +1,12 @@
+.demo-hero { padding-block: calc(var(--nav-h) + var(--space-6)) var(--space-7); }
+.demo-hero .case-hero__title { line-height: 1.08; }
+.demo-hero > .actions { align-items: center; margin-top: var(--space-4); }
+
 .fx-desk[hidden] { display: none; }
 .fx-desk { display: grid; gap: var(--space-5); padding-bottom: var(--space-8); font-size: .92rem; }
 .fx-desk h2 { font: 400 clamp(1.6rem, 3vw, 2.15rem)/1.1 var(--font-display); }
 .fx-desk p { margin-block: .35rem 0; }
-.fx-controls, .fx-controls__buttons, .fx-heading, .fx-links, .fx-legend { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem 1rem; }
+.fx-controls, .fx-controls__buttons, .fx-heading, .fx-legend { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem 1rem; }
 .fx-heading, .fx-controls { justify-content: space-between; }
 .fx-controls { padding-block: .8rem; border-block: 1px solid var(--line); }
 .fx-controls__buttons { gap: .35rem; }

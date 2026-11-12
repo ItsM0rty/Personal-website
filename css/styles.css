@@ -48,6 +48,12 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 html.js-anim [data-hero-item],

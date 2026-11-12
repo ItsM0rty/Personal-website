@@ -37,9 +37,14 @@ function makeChart(canvas, readout, series, formatValue, extra = {}) {
     const height = canvas.clientHeight;
     if (width < 100 || height < 100) return;
     const scale = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(width * scale);
-    canvas.height = Math.round(height * scale);
+    const pixelWidth = Math.round(width * scale);
+    const pixelHeight = Math.round(height * scale);
+    if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+      canvas.width = pixelWidth;
+      canvas.height = pixelHeight;
+    }
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    ctx.clearRect(0, 0, width, height);
     const plot = { left: width < 460 ? 47 : 61, right: width - 13, top: 15, bottom: height - 26 };
     const values = rows.flatMap((row) => visibleColumns.map((column) => row[column]));
     const low = Math.min(0, ...values);
@@ -109,14 +114,26 @@ function makeChart(canvas, readout, series, formatValue, extra = {}) {
     }
   }
 
+  let frame;
+  function queueRender() {
+    if (frame !== undefined) return;
+    frame = requestAnimationFrame(() => {
+      frame = undefined;
+      render();
+    });
+  }
+
   function select(index) {
     if (!rows.length) return;
-    selected = Math.max(0, Math.min(rows.length - 1, index));
+    const next = Math.max(0, Math.min(rows.length - 1, index));
+    if (selected === next) return;
+    selected = next;
     readout.textContent = extra.describe(rows[selected]);
-    render();
+    queueRender();
   }
 
   canvas.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
     const rect = canvas.getBoundingClientRect();
     const left = rect.width < 460 ? 47 : 61;
     const share = (event.clientX - rect.left - left) / Math.max(1, rect.width - left - 13);
@@ -127,10 +144,11 @@ function makeChart(canvas, readout, series, formatValue, extra = {}) {
     event.preventDefault();
     select((selected ?? rows.length - 1) + (event.key === "ArrowRight" ? 1 : -1));
   });
-  new ResizeObserver(render).observe(canvas);
+  new ResizeObserver(queueRender).observe(canvas);
 
   return (points) => {
     rows = points;
+    selected = null;
     select(rows.length - 1);
   };
 }
@@ -228,7 +246,6 @@ async function main() {
     ["USD required at midpoint", dollars(payout.usd_at_mid)],
   ]);
   byId("source-count").textContent = number.format(run.ecb_observations);
-  byId("run-id").textContent = run.run_id;
   byId("demo-status").hidden = true;
   byId("desk").hidden = false;
   updatePolicy(75);

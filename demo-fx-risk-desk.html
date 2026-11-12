@@ -41,9 +41,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=fx-layout" />
     <link rel="stylesheet" href="css/components.css" />
-    <link rel="stylesheet" href="demos/fx-risk-desk/demo.css" />
+    <link rel="stylesheet" href="demos/fx-risk-desk/demo.css?v=2" />
     <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
   </head>
   <body>
@@ -63,9 +63,9 @@
       <main id="main">
         <header class="demo-hero wrap" data-hero>
           <p class="label" data-hero-item>Live demo</p>
-          <h1 class="demo-hero__title" data-hero-item>FX Risk Desk</h1>
+          <h1 class="case-hero__title" data-hero-item>FX Risk Desk</h1>
           <p class="lede" data-hero-item>Compare hedges on a hypothetical EUR and JPY book. The demo uses a saved run of daily reference rates and reprices options from precomputed Python scenarios.</p>
-          <div class="fx-links" data-hero-item><a class="btn" href="work-fx-risk-desk.html">Case study</a><a href="https://github.com/ItsM0rty/fx-risk-desk">GitHub</a></div>
+          <div class="actions fx-links" data-hero-item><a class="btn" href="work-fx-risk-desk.html">Read the case study <span class="arrow">&rarr;</span></a><a href="https://github.com/ItsM0rty/fx-risk-desk">GitHub</a></div>
         </header>
         <div class="wrap">
           <p id="demo-status" role="status" aria-live="polite">Loading the saved risk run…</p>
@@ -131,7 +131,7 @@
             <table class="fx-table" aria-label="Illustrative payout conversion"><tbody id="payout-table"></tbody></table>
             <p class="fx-note">Illustrative payout based on the <a href="https://www.nrb.org.np/api-docs-v1/">Nepal Rastra Bank USD reference quote</a>.</p>
           </section>
-          <p class="fx-note">Source <a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">European Central Bank</a> · <span id="source-count"></span> reference marks transformed into returns and risk results · Run <code id="run-id"></code></p>
+          <p class="fx-note">Source <a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">European Central Bank</a> · <span id="source-count"></span> reference marks transformed into returns and risk results</p>
         </div>
       </main>
 
@@ -147,6 +147,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script type="module" src="js/animations.js"></script>
-    <script type="module" src="demos/fx-risk-desk/demo.js"></script>
+    <script type="module" src="demos/fx-risk-desk/demo.js?v=2"></script>
   </body>
 </html>
