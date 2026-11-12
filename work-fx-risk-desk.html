@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
+          }
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
+      })();
+    </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <title>FX Risk Desk | Suyash Bhattarai</title>
+    <meta name="description" content="A public-data FX risk desk for comparing hedge policies, measuring tail losses, and pricing European currency options." />
+    <link rel="canonical" href="https://www.suyashbhattarai.com.np/work-fx-risk-desk" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="FX Risk Desk | Suyash Bhattarai" />
+    <meta property="og:description" content="A public-data FX risk desk for comparing hedge policies, measuring tail losses, and pricing European currency options." />
+    <meta property="og:url" content="https://www.suyashbhattarai.com.np/work-fx-risk-desk" />
+    <meta property="og:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FX Risk Desk | Suyash Bhattarai" />
+    <meta name="twitter:description" content="A public-data FX risk desk for comparing hedge policies, measuring tail losses, and pricing European currency options." />
+    <meta name="twitter:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","name":"FX Risk Desk","description":"A public-data FX risk desk for comparing hedge policies, measuring tail losses, and pricing European currency options.","url":"https://www.suyashbhattarai.com.np/work-fx-risk-desk","inLanguage":"en","author":{"@type":"Person","name":"Suyash Bhattarai"}}</script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://www.suyashbhattarai.com.np/work-roleproof#article","headline":"RoleProof","description":"Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo.","url":"https://www.suyashbhattarai.com.np/work-roleproof","image":"https://www.suyashbhattarai.com.np/images/og.png","author":{"@id":"https://www.suyashbhattarai.com.np/#person"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.suyashbhattarai.com.np/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.suyashbhattarai.com.np/work"},{"@type":"ListItem","position":3,"name":"RoleProof","item":"https://www.suyashbhattarai.com.np/work-roleproof"}]},{"@type":"Person","@id":"https://www.suyashbhattarai.com.np/#person","name":"Suyash Bhattarai","jobTitle":["AI engineer","Full stack developer"],"url":"https://www.suyashbhattarai.com.np/","image":"https://www.suyashbhattarai.com.np/images/portrait.jpg","email":"mailto:hey@suyashbhattarai.com.np","sameAs":["https://github.com/ItsM0rty"],"knowsAbout":["LLM systems","model evaluation","computer vision","Rust","full stack development"]}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="case-hero wrap" data-hero>
+          <p class="label" data-hero-item>Independent project, 2026</p>
+          <h1 class="case-hero__title" data-hero-item>FX Risk Desk</h1>
+          <p class="lede" data-hero-item>I built a small FX risk desk to see what happens to a hypothetical book when I hedge part of its euro exposure. It shows the cost of the hedge, the size of losses, and how often they cross the forecast threshold.</p>
+          <dl class="meta" data-hero-item>
+            <div><dt class="label">Role</dt><dd>Solo project. Data pipeline, risk and forecast evaluation, API, and interface.</dd></div>
+            <div><dt class="label">Stack</dt><dd>Python, XGBoost, FastAPI, React, TypeScript</dd></div>
+            <div><dt class="label">Links</dt><dd><a href="demo-fx-risk-desk.html">Live demo</a>, <a href="https://github.com/ItsM0rty/fx-risk-desk">GitHub</a></dd></div>
+          </dl>
+        </header>
+        <section class="wrap">
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">01</p><h2 class="h3">The book</h2></div>
+            <div class="prose"><p>The example book holds a EUR receivable and a JPY payable. I used daily ECB reference rates to mark both legs in USD. The demo lets you hedge 0%, 25%, 50%, 75%, or 100% of the EUR leg, with an explicit daily cost. The JPY leg stays open.</p><p>There is also a separate USD to NPR payout scenario based on a public Nepal Rastra Bank reference quote.</p></div>
+          </div>
+          <div class="chapter" data-reveal>
+            <div class="chapter__side"><p class="label">02</p><h2 class="h3">Measuring the hedge</h2></div>
+            <div class="prose"><p>I estimate one-day 99% VaR and expected shortfall from the preceding 250 P&amp;Ls. Each new observation is scored against the threshold available at the time. Kupiec and Christoffersen tests check the frequency and clustering of breaches.</p><p>In the saved run, the 50% EUR hedge lowered estimated next-day VaR from <strong>$11,856 to $7,655</strong>. The fully hedged EUR leg left the JPY exposure open and produced a VaR of $12,262. You can see each policy’s P&amp;L and breach count in the demo.</p></div>
+          </div>
+        </section>
+        <section class="section is-dark"><div class="wrap"><div class="chapter" style="border-top: 0; padding-top: 0" data-reveal>
+          <div class="chapter__side"><p class="label">03</p><h2 class="h3">Forecasts and pricing</h2></div>
+          <div class="prose" style="max-width: 44rem">
+            <div class="incident"><span class="label">Forecast</span><h3>How wide does the interval need to be?</h3><p>I retrain XGBoost each year on data available before that year’s first forecast outcome. On the 255-observation 2025 holdout, the nominal 80% band covered 82.0% of observed returns. The rolling baseline covered 74.9% with a narrower band and slightly lower loss at the 10th percentile.</p></div>
+            <div class="incident"><span class="label">Pricing</span><h3>What changes when spot moves?</h3><p>The option panel uses Garman–Kohlhagen to price European EUR/USD calls and puts. You can change the strike, expiry, and assumed volatility and see the premium and the P&amp;L from a spot shock.</p></div>
+          </div>
+        </div></div></section>
+        <section class="wrap"><div class="chapter" data-reveal>
+          <div class="chapter__side"><p class="label">04</p><h2 class="h3">What I checked</h2></div>
+          <div class="prose"><p>The source repo includes tests for quote direction, hedge costs, look-ahead, option parity, and API validation. The generated TypeScript client was packed and tested against the local API. The browser demo runs from saved calculations and uses option presets generated by the same Python pricer.</p><p>The book and hedge costs are hypothetical. Prices are daily reference marks, and the hedge uses a spot-offset model. Historical order-book replay is pending suitable public data.</p><p><a class="btn" href="demo-fx-risk-desk.html">Try the live demo</a> <a href="https://github.com/ItsM0rty/fx-risk-desk">View the source on GitHub</a></p></div>
+        </div></section>
+        <a href="work-openswitch.html" class="next-case wrap"><span class="label">Next case study</span><span class="next-case__title">Open Switch <span class="arrow">&rarr;</span></span></a>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+  </body>
+</html>

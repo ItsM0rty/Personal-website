@@ -100,6 +100,15 @@ Backend generator with a schema compiler, scoped model edits and a bounded repai
 
 How I work
 
+### FX Risk Desk
+
+A public-data project that compares hedge ratios on a hypothetical EUR and JPY book. It includes one-day VaR and expected shortfall, coverage tests, an EUR/USD quantile forecast, and European FX option scenarios. The demo uses a saved research run.
+
+- Case study: https://www.suyashbhattarai.com.np/work-fx-risk-desk
+- Live demo: https://www.suyashbhattarai.com.np/demo-fx-risk-desk
+- Code: https://github.com/ItsM0rty/fx-risk-desk
+
+
 ## A green test suite is a claim, not a proof.
 
 ### Run it live

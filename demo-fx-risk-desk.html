@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        root.classList.add("js-anim");
+        try {
+          if (sessionStorage.getItem("pixel-transition") === "arriving") {
+            root.classList.add("is-pixel-covered");
+            window.setTimeout(function () { root.classList.remove("is-pixel-covered"); }, 2500);
+          } else if (sessionStorage.getItem("page-transition") === "quick") {
+            root.classList.add("is-quick-arrival");
+          }
+        } catch (error) {}
+        window.setTimeout(function () { root.classList.remove("js-anim", "is-quick-arrival"); }, 3000);
+      })();
+    </script>
+    <link rel="icon" href="/images/title.webp" type="image/webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <title>FX Risk Desk Live Demo | Suyash Bhattarai</title>
+    <meta name="description" content="Compare hedge ratios, inspect EUR/USD quantile forecasts, and reprice FX option scenarios in your browser." />
+    <link rel="canonical" href="https://www.suyashbhattarai.com.np/demo-fx-risk-desk" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="FX Risk Desk Live Demo | Suyash Bhattarai" />
+    <meta property="og:description" content="Compare hedge ratios, inspect EUR/USD quantile forecasts, and reprice FX option scenarios in your browser." />
+    <meta property="og:url" content="https://www.suyashbhattarai.com.np/demo-fx-risk-desk" />
+    <meta property="og:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FX Risk Desk Live Demo | Suyash Bhattarai" />
+    <meta name="twitter:description" content="Compare hedge ratios, inspect EUR/USD quantile forecasts, and reprice FX option scenarios in your browser." />
+    <meta name="twitter:image" content="https://www.suyashbhattarai.com.np/images/og.png" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"FX Risk Desk Live Demo","description":"Compare hedge ratios, inspect EUR/USD quantile forecasts, and reprice FX option scenarios in your browser.","url":"https://www.suyashbhattarai.com.np/demo-fx-risk-desk","inLanguage":"en","applicationCategory":"FinanceApplication"}</script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://www.suyashbhattarai.com.np/work-roleproof#article","headline":"RoleProof","description":"Evidence-backed job match explanations with exact source references, explicit uncertainty, and a browser demo.","url":"https://www.suyashbhattarai.com.np/work-roleproof","image":"https://www.suyashbhattarai.com.np/images/og.png","author":{"@id":"https://www.suyashbhattarai.com.np/#person"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.suyashbhattarai.com.np/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.suyashbhattarai.com.np/work"},{"@type":"ListItem","position":3,"name":"RoleProof","item":"https://www.suyashbhattarai.com.np/work-roleproof"}]},{"@type":"Person","@id":"https://www.suyashbhattarai.com.np/#person","name":"Suyash Bhattarai","jobTitle":["AI engineer","Full stack developer"],"url":"https://www.suyashbhattarai.com.np/","image":"https://www.suyashbhattarai.com.np/images/portrait.jpg","email":"mailto:hey@suyashbhattarai.com.np","sameAs":["https://github.com/ItsM0rty"],"knowsAbout":["LLM systems","model evaluation","computer vision","Rust","full stack development"]}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="demos/fx-risk-desk/demo.css" />
+    <noscript><style>.load_grid { display: none; } [data-hero-item], [data-reveal], main { opacity: 1 !important; visibility: visible !important; }</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="wrap nav__inner">
+          <a href="index.html" class="nav__logo">Suyash<span> Bhattarai</span></a>
+          <ul class="nav__links">
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main id="main">
+        <header class="demo-hero wrap" data-hero>
+          <p class="label" data-hero-item>Live demo</p>
+          <h1 class="demo-hero__title" data-hero-item>FX Risk Desk</h1>
+          <p class="lede" data-hero-item>Compare hedges on a hypothetical EUR and JPY book. The demo uses a saved run of daily reference rates and reprices options from precomputed Python scenarios.</p>
+          <div class="fx-links" data-hero-item><a class="btn" href="work-fx-risk-desk.html">Case study</a><a href="https://github.com/ItsM0rty/fx-risk-desk">GitHub</a></div>
+        </header>
+        <div class="wrap">
+          <p id="demo-status" role="status" aria-live="polite">Loading the saved risk run…</p>
+          <noscript>This demo needs JavaScript to load the saved run and change scenarios.</noscript>
+        </div>
+        <div class="fx-desk wrap" id="desk" hidden>
+          <div class="fx-controls">
+            <div><strong id="hedge-label">EUR exposure hedged</strong><p class="fx-note">JPY exposure stays open · Reference date <span id="as-of"></span></p></div>
+            <div class="fx-controls__buttons" role="group" aria-labelledby="hedge-label">
+              <button type="button" data-hedge="0" aria-pressed="false" disabled>0%</button>
+              <button type="button" data-hedge="25" aria-pressed="false" disabled>25%</button>
+              <button type="button" data-hedge="50" aria-pressed="false" disabled>50%</button>
+              <button type="button" data-hedge="75" aria-pressed="true" disabled>75%</button>
+              <button type="button" data-hedge="100" aria-pressed="false" disabled>100%</button>
+            </div>
+          </div>
+          <section class="fx-metrics" aria-label="Selected hedge metrics" aria-live="polite">
+            <div><span>Next-day 99% VaR</span><strong id="var-value"></strong><small id="var-baseline"></small></div>
+            <div><span>Next-day 99% ES</span><strong id="es-value"></strong><small id="es-baseline"></small></div>
+            <div><span>Observed breaches</span><strong id="breach-value"></strong><small id="breach-count"></small></div>
+            <div><span>Mean daily hedge cost</span><strong id="fee-value"></strong><small id="fee-note"></small></div>
+          </section>
+          <div class="fx-columns">
+            <section class="fx-box">
+              <div class="fx-heading"><h2>P&amp;L and loss threshold</h2><span class="fx-note">Last 252 observations · USD</span></div>
+              <div class="fx-legend"><span class="fx-selected">Selected policy</span><span class="fx-baseline">Unhedged</span><span class="fx-threshold">99% VaR and breaches</span></div>
+              <canvas class="fx-chart" id="risk-chart" tabindex="0" aria-label="Daily profit, loss and VaR. Use the arrow keys to inspect dates." aria-describedby="risk-readout"></canvas>
+              <output class="fx-note fx-readout" id="risk-readout"></output>
+              <p class="fx-note">The threshold uses the previous <span id="risk-window"></span> observations. P&amp;L includes the stated hedge cost.</p>
+            </section>
+            <section class="fx-box">
+              <h2>Hypothetical book</h2>
+              <table class="fx-table"><thead><tr><th scope="col">Pair</th><th scope="col">Units</th><th scope="col">USD value</th></tr></thead><tbody id="positions-table"></tbody></table>
+              <h3>Coverage backtest</h3>
+              <table class="fx-table" aria-label="Coverage backtest results"><tbody id="coverage-table"></tbody></table>
+            </section>
+          </div>
+          <div class="fx-columns fx-columns--even">
+            <section class="fx-box">
+              <h2>EUR/USD quantile forecast</h2>
+              <div class="fx-legend"><span class="fx-selected">Observed return</span><span class="fx-baseline">Median and P10–P90 interval</span></div>
+              <canvas class="fx-chart fx-chart--small" id="forecast-chart" tabindex="0" aria-label="EUR/USD forecast band. Use the arrow keys to inspect dates." aria-describedby="forecast-readout"></canvas>
+              <output class="fx-note fx-readout" id="forecast-readout"></output>
+              <h3>2025 holdout</h3>
+              <table class="fx-table"><thead><tr><th scope="col">Metric</th><th scope="col">XGBoost</th><th scope="col">Rolling baseline</th></tr></thead><tbody id="forecast-table"></tbody></table>
+              <p class="fx-note" id="holdout-note"></p>
+            </section>
+            <section class="fx-box">
+              <h2>FX option scenario</h2>
+              <p class="fx-note">EUR/USD European option · €1m notional · 4.0% USD and 2.5% EUR rate assumptions</p>
+              <form class="fx-form" id="option-form">
+                <label>Type<select name="kind"><option value="put">Put</option><option value="call">Call</option></select></label>
+                <label>Expiry<select name="days"><option value="30">30 days</option><option value="90" selected>90 days</option><option value="180">180 days</option></select></label>
+                <label>Volatility<select name="volatility"><option value="6">6%</option><option value="9" selected>9%</option><option value="12">12%</option><option value="15">15%</option></select></label>
+                <label>Strike / spot<select name="strike"><option value="95">95%</option><option value="100" selected>100%</option><option value="105">105%</option></select></label>
+              </form>
+              <div class="fx-option-metrics" aria-live="polite"><span>Premium <strong id="option-premium"></strong></span><span>Spot delta <strong id="option-delta"></strong></span><span>Strike <strong id="option-strike"></strong></span></div>
+              <table class="fx-table"><thead><tr><th scope="col">Spot shock</th><th scope="col">USD value</th><th scope="col">USD change</th></tr></thead><tbody id="shocks-table"></tbody></table>
+            </section>
+          </div>
+          <section class="fx-box">
+            <div class="fx-heading"><h2>USD to NPR payout</h2><span class="fx-note" id="payout-date"></span></div>
+            <table class="fx-table" aria-label="Illustrative payout conversion"><tbody id="payout-table"></tbody></table>
+            <p class="fx-note">Illustrative payout based on the <a href="https://www.nrb.org.np/api-docs-v1/">Nepal Rastra Bank USD reference quote</a>.</p>
+          </section>
+          <p class="fx-note">Source <a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">European Central Bank</a> · <span id="source-count"></span> reference marks transformed into returns and risk results · Run <code id="run-id"></code></p>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span>&copy; 2026 Suyash Bhattarai</span>
+          <a href="mailto:hey@suyashbhattarai.com.np">hey@suyashbhattarai.com.np</a>
+        </div>
+      </footer>
+    </div>
+    <div class="load_grid" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="demos/fx-risk-desk/demo.js"></script>
+  </body>
+</html>

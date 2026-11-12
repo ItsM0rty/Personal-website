@@ -16,6 +16,8 @@
 
 - [Entode](https://www.suyashbhattarai.com.np/work-entode): Backend generator with a schema compiler, scoped model edits and a bounded repair loop driven by executable checks.
 
+- [FX Risk Desk](https://www.suyashbhattarai.com.np/work-fx-risk-desk): FX hedging, VaR and expected shortfall, and European option scenarios on public reference rates.
+
 ## Case studies
 
 - [Representation Alignment](https://www.suyashbhattarai.com.np/work-alignment): A case study on embedding alignment between independently trained toy encoders, including the reference reproduction and unsupervised experiments.
@@ -47,6 +49,8 @@
 - [Quint Live Demo](https://www.suyashbhattarai.com.np/demo-quint): Use the Quint demo to inspect each choice in a chat interface, including the model input, user-visible result, and render placement.
 
 - [Screener Search Demo](https://www.suyashbhattarai.com.np/demo-screener): Search papers in the browser using keyword, semantic, and fused ranking, and compare how the Screener engine orders the results.
+
+- [FX Risk Desk Live Demo](https://www.suyashbhattarai.com.np/demo-fx-risk-desk): Compare hedge ratios and option presets from a saved risk run. [GitHub](https://github.com/ItsM0rty/fx-risk-desk).
 
 ## About and contact
 
